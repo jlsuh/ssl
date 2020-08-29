@@ -15,7 +15,7 @@ const int ESTADO_INICIAL = E0;
 
 int ESTADOS_A_PARAR[CANTIDAD_ESTADOS_A_PARAR] = {E2, E4, E6, E8, E9};
 int ESTADOS_ACEPTORES[CANTIDAD_ESTADOS_ACEPTORES] = {E2, E4, E8, E9};
-int ESTADOS_CENTINELA[CANTIDAD_ESTADOS_CENTINELA] = {E2, E4, E6 ,E8, E9};
+int ESTADOS_CENTINELA[CANTIDAD_ESTADOS_CENTINELA] = {E2, E4, E6 , E8, E9};
 
 int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
 /* T.T     L    0    D    #    seq. escape  Otro  fdt*/
@@ -33,7 +33,6 @@ int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
 
 int analizarCadena(FILE* archivo, int lexemasEncontrados[]){
   int estado = ESTADO_INICIAL;
-
   char *caracterLeido = malloc(sizeof(char));
 
   while(!pararDeAnalizar(estado)){
