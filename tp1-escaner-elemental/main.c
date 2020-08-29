@@ -12,7 +12,7 @@ int main(){
   }
 
   while(resultado != tokenFDT){
-    resultado = analizarCadena(archivo, lexemasEncontrados);
+    resultado = analizarCadena(archivo, lexemasEncontrados);  // Invocación del scanner
     switch(resultado){
     case tokenIdentificador:
       printf("identificador\n");
@@ -29,6 +29,7 @@ int main(){
     }
   }
 
+  /* Show lexemas encontrados */
   printf("----\n");
   printf("Identificadores: %d\n", lexemasEncontrados[tokenIdentificador]);
   printf("Constantes enteras: %d\n", lexemasEncontrados[tokenConstanteEntera]);
@@ -39,4 +40,3 @@ int main(){
 
   return EXIT_SUCCESS;
 }
-
