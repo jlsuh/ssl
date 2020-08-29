@@ -1,8 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "scanner.h"
 
-int main()
-{
-    printf("Hello world!\n");
-    return 0;
+int main(){
+  FILE *archivo = fopen("datosPrueba.txt", "r");
+
+  imprimirContenido(archivo);
+
+  int array[] = {1,2,3};
+
+  int aux = longitudArray(array);
+
+  printf("long. array: %d",aux);
+
+  fclose(archivo);
+
+  return EXIT_SUCCESS;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
