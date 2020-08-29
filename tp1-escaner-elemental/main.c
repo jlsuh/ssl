@@ -3,29 +3,26 @@
 #include "scanner.h"
 
 int main(){
-  FILE *archivo = fopen("datosPrueba.txt", "r");
   int resultado;
-//  imprimirContenido(archivo);
 
-//  int array[] = {1,2,3};
-//
-//  int aux = longitudArray(array);
-//
-//  printf("long. array: %d",aux);
+  FILE *archivo = fopen("datosPrueba.txt", "r");
+  if(archivo == NULL){
+    printf("Error al intentar abrir el archivo...");
+  }
 
-  while(resultado != 3){
-    resultado = analizador(archivo);
+  while(resultado != tokenFDT){
+    resultado = analizarCadena(archivo);
     switch(resultado){
-    case 0:
+    case tokenIdentificador:
       printf("identificador\n");
       break;
-    case 1:
+    case tokenConstanteEntera:
       printf("constante entera\n");
       break;
-    case 2:
+    case tokenNumeral:
       printf("Numeral\n");
       break;
-    case 4:
+    case tokenError:
       printf("error\n");
       break;
     }
