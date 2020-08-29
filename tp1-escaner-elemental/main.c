@@ -4,6 +4,7 @@
 
 int main(){
   int resultado;
+  int lexemasEncontrados[] = {0 /*Identificadores*/, 0 /*Constantes enteras*/, 0 /*Numerales*/, 0 /*Errores*/};
 
   FILE *archivo = fopen("datosPrueba.txt", "r");
   if(archivo == NULL){
@@ -11,7 +12,7 @@ int main(){
   }
 
   while(resultado != tokenFDT){
-    resultado = analizarCadena(archivo);
+    resultado = analizarCadena(archivo, lexemasEncontrados);
     switch(resultado){
     case tokenIdentificador:
       printf("identificador\n");
@@ -28,20 +29,14 @@ int main(){
     }
   }
 
+  printf("----\n");
+  printf("Identificadores: %d\n", lexemasEncontrados[tokenIdentificador]);
+  printf("Constantes enteras: %d\n", lexemasEncontrados[tokenConstanteEntera]);
+  printf("Numerales: %d\n", lexemasEncontrados[tokenNumeral]);
+  printf("Errores: %d\n", lexemasEncontrados[tokenError]);
+
   fclose(archivo);
 
   return EXIT_SUCCESS;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

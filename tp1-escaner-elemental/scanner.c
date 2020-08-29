@@ -31,30 +31,30 @@ int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
 /* E9+ */ {E99, E99, E99, E99, E99,         E99,  E99}
 };
 
-int analizarCadena(FILE* archivo){
+int analizarCadena(FILE* archivo, int lexemasEncontrados[]){
   int estado = ESTADO_INICIAL;
-  char *caracterLeido = malloc(sizeof(caracterLeido));
-  char *tokenFormado = malloc(sizeof(tokenFormado) * LEN_TOKEN_FORMADO);
+
+  char *caracterLeido = malloc(sizeof(char));
 
   while(!pararDeAnalizar(estado)){
     *caracterLeido = getc(archivo);
     int simbolo = columnaAAcceder(caracterLeido);
     estado = TT[estado][simbolo];
-
-    /* Otras acciones como contar líneas, armar lexema, entre otras yerbas */
-
-    tokenFormado = concatenar(tokenFormado, caracterLeido);
   }
 
   if(esAceptor(estado)){
     if(esCentinela(estado)){
       ungetc(*caracterLeido, archivo);
+      free(caracterLeido);
       switch(estado){
       case E2:
+        lexemasEncontrados[tokenIdentificador] += 1;
         return tokenIdentificador;
       case E4:
+        lexemasEncontrados[tokenConstanteEntera] += 1;
         return tokenConstanteEntera;
       case E8:
+        lexemasEncontrados[tokenNumeral] += 1;
         return tokenNumeral;
       case E9:
         return tokenFDT;
@@ -62,11 +62,10 @@ int analizarCadena(FILE* archivo){
     }
   } else {
     ungetc(*caracterLeido, archivo);
+    free(caracterLeido);
+    lexemasEncontrados[tokenError] += 1;
     return tokenError;
   }
-
-  free(caracterLeido);
-  free(tokenFormado);
 
   return -1;
 }
