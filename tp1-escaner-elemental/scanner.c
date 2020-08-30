@@ -12,11 +12,11 @@
 
 const int ESTADO_INICIAL = E0;
 
-int ESTADOS_A_PARAR[CANTIDAD_ESTADOS_A_PARAR] = {E2, E4, E6, E8, E9};
-int ESTADOS_ACEPTORES[CANTIDAD_ESTADOS_ACEPTORES] = {E2, E4, E8, E9};
-int ESTADOS_CENTINELA[CANTIDAD_ESTADOS_CENTINELA] = {E2, E4, E6 , E8, E9};
+const int ESTADOS_A_PARAR[CANTIDAD_ESTADOS_A_PARAR] = {E2, E4, E6, E8, E9};
+const int ESTADOS_ACEPTORES[CANTIDAD_ESTADOS_ACEPTORES] = {E2, E4, E8, E9};
+const int ESTADOS_CENTINELA[CANTIDAD_ESTADOS_CENTINELA] = {E2, E4, E6 , E8, E9};
 
-int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
+const int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
 /* T.T     L    0    D    #    seq. escape  Otro  fdt*/
 /* E0  */ {E1,  E5,  E3,  E7,  E0,          E5,   E9},
 /* E1  */ {E1,  E1,  E1,  E2,  E2,          E2,   E2},
@@ -97,7 +97,7 @@ int pararDeAnalizar(int estado){
   return esUnoDe(estado, CANTIDAD_ESTADOS_A_PARAR, ESTADOS_A_PARAR);
 }
 
-int esUnoDe(int estado, const int CANTIDAD, int ESTADOS_QUE_CUMPLEN[]){
+int esUnoDe(int estado, const int CANTIDAD, const int ESTADOS_QUE_CUMPLEN[]){
   for(int i = 0; i < CANTIDAD; i += 1){
     if(estado == ESTADOS_QUE_CUMPLEN[i]){
       return 1;

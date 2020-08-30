@@ -12,6 +12,6 @@ int esCentinela(int estado);
 int esAceptor(int estado);
 int columnaAAcceder(char *c);
 char* concatenar(const char *s1, const char *s2);
-int esUnoDe(int estado, const int CANTIDAD, int ESTADOS_QUE_CUMPLEN[]);
+int esUnoDe(int estado, const int CANTIDAD, const int ESTADOS_QUE_CUMPLEN[]);
 
 #endif // SCANNER_H_INCLUDED
