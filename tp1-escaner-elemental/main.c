@@ -12,7 +12,7 @@ int main(){
   }
 
   while(resultado != tokenFDT){
-    resultado = analizarCadena(archivo, lexemasEncontrados);  // Invocación del scanner
+    resultado = scanFlujo(archivo, lexemasEncontrados);  // Invocación del scanner
     switch(resultado){
     case tokenIdentificador:
       printf("identificador\n");

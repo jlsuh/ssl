@@ -2,23 +2,23 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "scanner.h"  // << toda biblioteca por implementación que scanner.c llegue a usar, deberá estar declarada de esta manera
+#include "scanner.h"
 
-#define CANTIDAD_FILAS 10
-#define CANTIDAD_COLUMNAS 7
-#define CANTIDAD_ESTADOS_A_PARAR 5
-#define CANTIDAD_ESTADOS_ACEPTORES 4
-#define CANTIDAD_ESTADOS_CENTINELA 5
+#define CANT_ESTADOS_ACEPTORES 4
+#define CANT_ESTADOS_CENTINELA 5
+#define CANT_ESTADOS_A_PARAR 5
+#define CANT_COLUMNAS 7
+#define CANT_FILAS 10
 
 const int ESTADO_INICIAL = E0;
 
-const int ESTADOS_A_PARAR[CANTIDAD_ESTADOS_A_PARAR] = {E2, E4, E6, E8, E9};
-const int ESTADOS_ACEPTORES[CANTIDAD_ESTADOS_ACEPTORES] = {E2, E4, E8, E9};
-const int ESTADOS_CENTINELA[CANTIDAD_ESTADOS_CENTINELA] = {E2, E4, E6 , E8, E9};
+const int ESTADOS_CENTINELA[CANT_ESTADOS_CENTINELA] = {E2, E4, E6 , E8, E9};
+const int ESTADOS_ACEPTORES[CANT_ESTADOS_ACEPTORES] = {E2, E4, E8, E9};
+const int ESTADOS_A_PARAR[CANT_ESTADOS_A_PARAR] = {E2, E4, E6, E8, E9};
 
-const int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
+const int TT[CANT_FILAS][CANT_COLUMNAS] = {
 /* T.T     L    0    D    #    seq. escape  Otro  fdt*/
-/* E0  */ {E1,  E5,  E3,  E7,  E0,          E5,   E9},
+/* E0- */ {E1,  E5,  E3,  E7,  E0,          E5,   E9},
 /* E1  */ {E1,  E1,  E1,  E2,  E2,          E2,   E2},
 /* E2+ */ {E99, E99, E99, E99, E99,         E99,  E99},
 /* E3  */ {E4,  E3,  E3,  E4,  E4,          E4,   E4},
@@ -30,13 +30,13 @@ const int TT[CANTIDAD_FILAS][CANTIDAD_COLUMNAS] = {
 /* E9+ */ {E99, E99, E99, E99, E99,         E99,  E99}
 };
 
-int analizarCadena(FILE* archivo, int lexemasEncontrados[]){
+int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
   int estado = ESTADO_INICIAL;
   char *caracterLeido = malloc(sizeof(char));
 
   while(!pararDeAnalizar(estado)){
     *caracterLeido = getc(archivo);
-    int simbolo = columnaAAcceder(caracterLeido);
+    int simbolo = categorizarCaracter(caracterLeido);
     estado = TT[estado][simbolo];
   }
 
@@ -68,7 +68,7 @@ int analizarCadena(FILE* archivo, int lexemasEncontrados[]){
   return -1;
 }
 
-int columnaAAcceder(char *c){
+int categorizarCaracter(char *c){
   if(isalpha(*c)){
     return COL0; // Columna de letras
   } else if(*c == '0'){
@@ -86,15 +86,15 @@ int columnaAAcceder(char *c){
 }
 
 int esAceptor(int estado){
-  return esUnoDe(estado, CANTIDAD_ESTADOS_ACEPTORES, ESTADOS_ACEPTORES);
+  return esUnoDe(estado, CANT_ESTADOS_ACEPTORES, ESTADOS_ACEPTORES);
 }
 
 int esCentinela(int estado){
-  return esUnoDe(estado, CANTIDAD_ESTADOS_CENTINELA, ESTADOS_CENTINELA);
+  return esUnoDe(estado, CANT_ESTADOS_CENTINELA, ESTADOS_CENTINELA);
 }
 
 int pararDeAnalizar(int estado){
-  return esUnoDe(estado, CANTIDAD_ESTADOS_A_PARAR, ESTADOS_A_PARAR);
+  return esUnoDe(estado, CANT_ESTADOS_A_PARAR, ESTADOS_A_PARAR);
 }
 
 int esUnoDe(int estado, const int CANTIDAD, const int ESTADOS_QUE_CUMPLEN[]){
