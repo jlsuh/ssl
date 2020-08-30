@@ -5,11 +5,10 @@
 #include "scanner.h"  // << toda biblioteca por implementación que scanner.c llegue a usar, deberá estar declarada de esta manera
 
 #define CANTIDAD_FILAS 10
-#define CANTIDAD_COLUMNAS 17
+#define CANTIDAD_COLUMNAS 7
 #define CANTIDAD_ESTADOS_A_PARAR 5
 #define CANTIDAD_ESTADOS_ACEPTORES 4
 #define CANTIDAD_ESTADOS_CENTINELA 5
-#define LEN_TOKEN_FORMADO 50
 
 const int ESTADO_INICIAL = E0;
 
