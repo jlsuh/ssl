@@ -8,7 +8,6 @@ enum COLUMNAS {COL0, COL1, COL2, COL3, COL4, COL5};
 int esUnoDe(int estado, const int CANTIDAD, const int ESTADOS_QUE_CUMPLEN[]);
 int scanFlujo(FILE* archivo, int lexemasEncontrados[]);
 int categorizarCaracter(char *c);
-int esCentinela(int estado);
 int esAceptor(int estado);
 
 #endif // SCANNER_H_INCLUDED
