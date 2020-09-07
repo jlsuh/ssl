@@ -11,7 +11,6 @@
 
 const int ESTADO_INICIAL = E0;
 
-const int ESTADOS_CENTINELA[CANT_ESTADOS_CENTINELA] = {E5, E99, E129, E189};
 const int ESTADOS_ACEPTORES[CANT_ESTADOS_ACEPTORES] = {E5, E99, E129, E189};
 
 const int TT[CANT_FILAS][CANT_COLUMNAS] = {
@@ -40,7 +39,6 @@ int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
   }
 
   if(esAceptor(estado)){
-    if(esCentinela(estado)){
       ungetc(*caracterLeido, archivo);
       free(caracterLeido);
       switch(estado){
@@ -56,7 +54,6 @@ int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
       case E5:
         return tokenFDT;
       }
-    }
   } else {
     ungetc(*caracterLeido, archivo);
     free(caracterLeido);
@@ -70,24 +67,20 @@ int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
 int categorizarCaracter(char *c){
   if(isalpha(*c)){
     return COL0; // Columna de letras
-  } else if(isdigit(*c) || *c == '0'){
-    return COL2; // Columna de dígitos
+  } else if(isdigit(*c)){
+    return COL1; // Columna de dígitos
   } else if(*c == '#'){
-    return COL3; // Columna de numeral
-  } else if(isspace(*c) || *c == '\n' || *c == '\t'){
-    return COL4; // Columna secuencias escapes (son las dadas por consigna)
+    return COL2; // Columna de numeral
+  } else if(isspace(*c)){
+    return COL3; // Columna secuencias escapes (son las dadas por consigna)
   } else if(*c == EOF){
-    return COL6; // Columna fin de texto
+    return COL5; // Columna fin de texto
   }
-  return COL5; // Columna otros
+  return COL4; // Columna otros
 }
 
 int esAceptor(int estado){
   return esUnoDe(estado, CANT_ESTADOS_ACEPTORES, ESTADOS_ACEPTORES);
-}
-
-int esCentinela(int estado){
-  return esUnoDe(estado, CANT_ESTADOS_CENTINELA, ESTADOS_CENTINELA);
 }
 
 int esUnoDe(int estado, const int CANTIDAD, const int ESTADOS_QUE_CUMPLEN[]){
