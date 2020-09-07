@@ -25,7 +25,7 @@ const int TT[CANT_FILAS][CANT_COLUMNAS] = {
 /*
 * Para la posteridad:
 * En caso de agregar algún otro lexema a reconocer más, no olvidar de modificar el switch que evalúa el estado.
-* Modificar defines de CANT_FILAS, CANT_ESTADOS_ACEPTORES (en caso que amerite), CANT_ESTADOS_CENTINELA (en caso que amerite).
+* Modificar defines de CANT_FILAS y CANT_ESTADOS_ACEPTORES (en caso que amerite).
 */
 
 int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
@@ -39,9 +39,9 @@ int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
   }
 
   if(esAceptor(estado)){
-      ungetc(*caracterLeido, archivo);
-      free(caracterLeido);
-      switch(estado){
+    ungetc(*caracterLeido, archivo);
+    free(caracterLeido);
+    switch(estado){
       case E99:
         lexemasEncontrados[tokenIdentificador] += 1;
         return tokenIdentificador;
@@ -53,7 +53,7 @@ int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
         return tokenNumeral;
       case E5:
         return tokenFDT;
-      }
+    }
   } else {
     ungetc(*caracterLeido, archivo);
     free(caracterLeido);
@@ -72,7 +72,7 @@ int categorizarCaracter(char *c){
   } else if(*c == '#'){
     return COL2; // Columna de numeral
   } else if(isspace(*c)){
-    return COL3; // Columna secuencias escapes (son las dadas por consigna)
+    return COL3; // Columna secuencias escapes
   } else if(*c == EOF){
     return COL5; // Columna fin de texto
   }
