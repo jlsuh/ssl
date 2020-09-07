@@ -6,7 +6,7 @@ int main(){
   int resultado;
   int lexemasEncontrados[] = {0 /*Identificadores*/, 0 /*Constantes enteras*/, 0 /*Numerales*/, 0 /*Errores*/};
 
-  FILE *archivo = fopen("datosPrueba.txt", "r");
+  FILE *archivo = fopen("datos.txt", "r");
   if(archivo == NULL){
     printf("Error al intentar abrir el archivo...");
   }

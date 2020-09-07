@@ -6,7 +6,7 @@
 
 #define CANT_ESTADOS_ACEPTORES 4
 #define CANT_ESTADOS_CENTINELA 4
-#define CANT_COLUMNAS 7
+#define CANT_COLUMNAS 6
 #define CANT_FILAS 5
 
 const int ESTADO_INICIAL = E0;
@@ -15,12 +15,12 @@ const int ESTADOS_CENTINELA[CANT_ESTADOS_CENTINELA] = {E5, E99, E129, E189};
 const int ESTADOS_ACEPTORES[CANT_ESTADOS_ACEPTORES] = {E5, E99, E129, E189};
 
 const int TT[CANT_FILAS][CANT_COLUMNAS] = {
-/* T.T     L     0     D     #     seq. escape  Otro  fdt*/
-/* E0- */ {E1,   E3,   E2,   E4,   E0,          E3,   E5},
-/* E1  */ {E1,   E1,   E1,   E99,  E99,         E99,  E99},
-/* E2  */ {E129, E2,   E2,   E129, E129,        E129, E129},
-/* E3  */ {E159, E159, E159, E159, E159,        E3,   E159},
-/* E4  */ {E189, E189, E189, E189, E189,        E189, E189}
+/* T.T     L     D     #     seq. escape  Otro  fdt*/
+/* E0- */ {E1,   E2,   E4,   E0,          E3,   E5},
+/* E1  */ {E1,   E1,   E99,  E99,         E99,  E99},
+/* E2  */ {E129, E2,   E129, E129,        E129, E129},
+/* E3  */ {E159, E159, E159, E159,        E3,   E159},
+/* E4  */ {E189, E189, E189, E189,        E189, E189}
 };
 
 /*
@@ -70,9 +70,7 @@ int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
 int categorizarCaracter(char *c){
   if(isalpha(*c)){
     return COL0; // Columna de letras
-  } else if(*c == '0'){
-    return COL1; // Columna del cero
-  } else if(isdigit(*c)){
+  } else if(isdigit(*c) || *c == '0'){
     return COL2; // Columna de dígitos
   } else if(*c == '#'){
     return COL3; // Columna de numeral
