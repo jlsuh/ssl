@@ -4,56 +4,47 @@
 #include "scanner.h"
 
 #define CANT_ESTADOS_ACEPTORES 4
-#define CANT_ESTADOS_CENTINELA 4
 #define CANT_COLUMNAS 6
 #define CANT_FILAS 5
 
 const int ESTADO_INICIAL = E0;
 
-const int ESTADOS_ACEPTORES[CANT_ESTADOS_ACEPTORES] = {E5, E99, E129, E189};
+const int ESTADOS_ACEPTORES[CANT_ESTADOS_ACEPTORES] = {E200, E201, E202, E203};
 
 const int TT[CANT_FILAS][CANT_COLUMNAS] = {
-/* T.T     L     D     #     seq. escape  Otro  fdt*/
-/* E0- */ {E1,   E2,   E4,   E0,          E3,   E5},
-/* E1  */ {E1,   E1,   E99,  E99,         E99,  E99},
-/* E2  */ {E129, E2,   E129, E129,        E129, E129},
-/* E3  */ {E159, E159, E159, E159,        E3,   E159},
-/* E4  */ {E189, E189, E189, E189,        E189, E189}
+/* T.T     L     D     #      Esp. Blanco  Otro   fdt*/
+/* E0- */ {E1,   E2,   E201,  E0,          E3,    E200},
+/* E1  */ {E1,   E1,   E202,  E202,        E202,  E202},
+/* E2  */ {E203, E2,   E203,  E203,        E203,  E203},
+/* E3  */ {E204, E204, E204,  E204,        E3,    E204}
 };
-
-/*
-* Para la posteridad:
-* En caso de agregar algún otro lexema a reconocer más, no olvidar de modificar el switch que evalúa el estado.
-* Modificar defines de CANT_FILAS y CANT_ESTADOS_ACEPTORES (en caso que amerite).
-*/
 
 int scanFlujo(void){
   int estado = ESTADO_INICIAL;
-  char *caracterLeido = malloc(sizeof(char));
+  char caracterLeido;
 
-  while(estado < E5){
-    *caracterLeido = getchar();
-    int simbolo = categorizarCaracter(*caracterLeido);
+  while(estado <= E3){
+    caracterLeido = getchar();
+    int simbolo = categorizarCaracter(caracterLeido);
     estado = TT[estado][simbolo];
   }
 
   if(esAceptor(estado)){
-    ungetc(*caracterLeido, stdin);
-    free(caracterLeido);
-    switch(estado){
-      case E99:
-        return tokenIdentificador;
-      case E129:
-        return tokenConstanteEntera;
-      case E189:
-        return tokenNumeral;
-      case E5:
-        return tokenFDT;
+    if(estado == E201){     /* no retornar último caracter al flujo */
+      return tokenNumeral;
+    }
+    ungetc(caracterLeido, stdin);
+    switch(estado){         /* retornar último caracter al flujo */
+    case E200:
+      return tokenFDT;
+    case E202:
+      return tokenIdentificador;
+    case E203:
+      return tokenConstanteEntera;
+    break;
     }
   }
-
-  ungetc(*caracterLeido, stdin);
-  free(caracterLeido);
+  ungetc(caracterLeido, stdin);
   return tokenError;
 }
 
@@ -65,7 +56,7 @@ int categorizarCaracter(int c){
   } else if(c == '#'){
     return COL2; // Columna de numeral
   } else if(isspace(c)){
-    return COL3; // Columna secuencias escapes
+    return COL3; // Columna espacio en blanco
   } else if(c == EOF){
     return COL5; // Columna fin de texto
   }

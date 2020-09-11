@@ -3,7 +3,7 @@
 #include "lexema.h"
 #include "scanner.h"
 
-int main(int argc, const char*argv[]){
+int main(int argc, const char *argv[]){
   int resultado;
   int lexemasEncontrados[] = {0 /*Identificadores*/, 0 /*Constantes enteras*/, 0 /*Numerales*/, 0 /*Errores*/};
 
