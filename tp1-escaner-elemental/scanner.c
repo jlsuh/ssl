@@ -28,52 +28,52 @@ const int TT[CANT_FILAS][CANT_COLUMNAS] = {
 * Modificar defines de CANT_FILAS y CANT_ESTADOS_ACEPTORES (en caso que amerite).
 */
 
-int scanFlujo(FILE* archivo, int lexemasEncontrados[]){
+int scanFlujo(void){
   int estado = ESTADO_INICIAL;
   char *caracterLeido = malloc(sizeof(char));
 
   while(estado < E5){
-    *caracterLeido = getc(archivo);
-    int simbolo = categorizarCaracter(caracterLeido);
+    *caracterLeido = getchar();
+    int simbolo = categorizarCaracter(*caracterLeido);
     estado = TT[estado][simbolo];
   }
 
   if(esAceptor(estado)){
-    ungetc(*caracterLeido, archivo);
+    ungetc(*caracterLeido, stdin);
     free(caracterLeido);
     switch(estado){
       case E99:
-        lexemasEncontrados[tokenIdentificador] += 1;
+//        lexemasEncontrados[tokenIdentificador] += 1;
         return tokenIdentificador;
       case E129:
-        lexemasEncontrados[tokenConstanteEntera] += 1;
+//        lexemasEncontrados[tokenConstanteEntera] += 1;
         return tokenConstanteEntera;
       case E189:
-        lexemasEncontrados[tokenNumeral] += 1;
+//        lexemasEncontrados[tokenNumeral] += 1;
         return tokenNumeral;
       case E5:
         return tokenFDT;
     }
   } else {
-    ungetc(*caracterLeido, archivo);
+    ungetc(*caracterLeido, stdin);
     free(caracterLeido);
-    lexemasEncontrados[tokenError] += 1;
+//    lexemasEncontrados[tokenError] += 1;
     return tokenError;
   }
 
   return -1;
 }
 
-int categorizarCaracter(char *c){
-  if(isalpha(*c)){
+int categorizarCaracter(int c){
+  if(isalpha(c)){
     return COL0; // Columna de letras
-  } else if(isdigit(*c)){
+  } else if(isdigit(c)){
     return COL1; // Columna de dígitos
-  } else if(*c == '#'){
+  } else if(c == '#'){
     return COL2; // Columna de numeral
-  } else if(isspace(*c)){
+  } else if(isspace(c)){
     return COL3; // Columna secuencias escapes
-  } else if(*c == EOF){
+  } else if(c == EOF){
     return COL5; // Columna fin de texto
   }
   return COL4; // Columna otros

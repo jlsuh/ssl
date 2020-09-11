@@ -6,13 +6,8 @@ int main(){
   int resultado;
   int lexemasEncontrados[] = {0 /*Identificadores*/, 0 /*Constantes enteras*/, 0 /*Numerales*/, 0 /*Errores*/};
 
-  FILE *archivo = fopen("datosPrueba.txt", "r");
-  if(archivo == NULL){
-    printf("Error al intentar abrir el archivo...");
-  }
-
   while(resultado != tokenFDT){
-    resultado = scanFlujo(archivo, lexemasEncontrados);  // Invocación del scanner
+    resultado = scanFlujo();  // Invocación del scanner
     switch(resultado){
       case tokenIdentificador:
         printf("identificador\n");
@@ -27,16 +22,16 @@ int main(){
         printf("error\n");
         break;
     }
+//    contarLexema(resultado, lexemasEncontrados);
   }
 
+  /*algo*/
   /* Show lexemas encontrados */
   printf("----\nTotales:\n");
   printf("Identificadores %d\n", lexemasEncontrados[tokenIdentificador]);
   printf("Constantes enteras %d\n", lexemasEncontrados[tokenConstanteEntera]);
   printf("Numerales %d\n", lexemasEncontrados[tokenNumeral]);
   printf("Errores %d\n", lexemasEncontrados[tokenError]);
-
-  fclose(archivo);
 
   return EXIT_SUCCESS;
 }
