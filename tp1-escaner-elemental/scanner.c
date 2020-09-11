@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 #include "scanner.h"
 
@@ -43,25 +42,19 @@ int scanFlujo(void){
     free(caracterLeido);
     switch(estado){
       case E99:
-//        lexemasEncontrados[tokenIdentificador] += 1;
         return tokenIdentificador;
       case E129:
-//        lexemasEncontrados[tokenConstanteEntera] += 1;
         return tokenConstanteEntera;
       case E189:
-//        lexemasEncontrados[tokenNumeral] += 1;
         return tokenNumeral;
       case E5:
         return tokenFDT;
     }
-  } else {
-    ungetc(*caracterLeido, stdin);
-    free(caracterLeido);
-//    lexemasEncontrados[tokenError] += 1;
-    return tokenError;
   }
 
-  return -1;
+  ungetc(*caracterLeido, stdin);
+  free(caracterLeido);
+  return tokenError;
 }
 
 int categorizarCaracter(int c){

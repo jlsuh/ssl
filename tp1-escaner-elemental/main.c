@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "lexema.h"
 #include "scanner.h"
 
-int main(){
+int main(int argc, const char*argv[]){
   int resultado;
   int lexemasEncontrados[] = {0 /*Identificadores*/, 0 /*Constantes enteras*/, 0 /*Numerales*/, 0 /*Errores*/};
 
@@ -22,10 +23,9 @@ int main(){
         printf("error\n");
         break;
     }
-//    contarLexema(resultado, lexemasEncontrados);
+    contarLexema(resultado, lexemasEncontrados);
   }
 
-  /*algo*/
   /* Show lexemas encontrados */
   printf("----\nTotales:\n");
   printf("Identificadores %d\n", lexemasEncontrados[tokenIdentificador]);
