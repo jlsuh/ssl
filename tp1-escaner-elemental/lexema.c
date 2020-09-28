@@ -4,16 +4,16 @@
 void contarLexema(int resultado, int lexemasEncontrados[]){
   switch(resultado){
     case tokenIdentificador:
-      lexemasEncontrados[tokenIdentificador] += 1;
+      lexemasEncontrados[tokenIdentificador]++;
       break;
     case tokenConstanteEntera:
-      lexemasEncontrados[tokenConstanteEntera] += 1;
+      lexemasEncontrados[tokenConstanteEntera]++;
       break;
     case tokenNumeral:
-      lexemasEncontrados[tokenNumeral] += 1;
+      lexemasEncontrados[tokenNumeral]++;
       break;
     case tokenError:
-      lexemasEncontrados[tokenError] += 1;
+      lexemasEncontrados[tokenError]++;
       break;
   }
 }

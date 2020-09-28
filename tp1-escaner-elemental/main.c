@@ -4,10 +4,12 @@
 #include "scanner.h"
 
 int main(int argc, const char *argv[]){
-  int resultado;
   int lexemasEncontrados[] = {0 /*Identificadores*/, 0 /*Constantes enteras*/, 0 /*Numerales*/, 0 /*Errores*/};
 
-  while(resultado != tokenFDT){
+  typedef enum TOKENS Resultado;
+  Resultado resultado;
+
+  do {
     resultado = scanFlujo();  // Invocación del scanner
     switch(resultado){
       case tokenIdentificador:
@@ -22,9 +24,11 @@ int main(int argc, const char *argv[]){
       case tokenError:
         printf("error\n");
         break;
+      default:
+        break;
     }
     contarLexema(resultado, lexemasEncontrados);
-  }
+  } while(resultado != tokenFDT);
 
   /* Show lexemas encontrados */
   printf("----\nTotales:\n");

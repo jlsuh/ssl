@@ -30,13 +30,14 @@ int scanFlujo(void){
   }
 
   if(esAceptor(estado)){
-    if(estado == E201){     /* no retornar último caracter al flujo */
+    if(estado == E200){     /* no retornar último caracter al flujo */
+      return tokenFDT;
+    } else if(estado == E201){
       return tokenNumeral;
     }
+    /* Se podría declarar un nuevo arreglo con los estados centinelas: los caracteres leidos que deben hacer el ungetc */
     ungetc(caracterLeido, stdin);
     switch(estado){         /* retornar último caracter al flujo */
-    case E200:
-      return tokenFDT;
     case E202:
       return tokenIdentificador;
     case E203:
