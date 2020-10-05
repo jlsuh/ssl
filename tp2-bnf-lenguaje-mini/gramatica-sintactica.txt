@@ -2,22 +2,21 @@ primaria:
 	constante-entera
 	identificador
 	( expresion-aditiva )
+	- expresion-aditiva
 
-expresion-unaria:
-	primaria
-	- primaria
-
------ Nota: probablemente haya que basarse como en el pdf 14. Motivo: eliminar la recursividad del PAS
 expresion-multiplicativa:
-	expresion-unaria
-	expresion-multiplicativa * expresion-unaria
-	expresion-multiplicativa / expresion-unaria
+	primaria resto-multiplicativa(sub(opt))
+
+resto-multiplicativa:
+	* primaria resto-multiplicativa(sub(opt))
+	/ primaria resto-multiplicativa(sub(opt))
 
 expresion-aditiva:
-	expresion-multiplicativa
-	expresion-aditiva + expresion-multiplicativa
-	expresion-aditiva - expresion-multiplicativa
------ Nota: probablemente haya que basarse como en el pdf 14. Motivo: eliminar la recursividad del PAS
+	expresion-multiplicativa resto-aditiva(sub(opt))
+
+resto-aditiva:
+	+ expresion-multiplicativa resto-aditiva(sub(opt))
+	- expresion-multiplicativa resto-aditiva(sub(opt))
 
 lista-identificadores:
 	identificador , lista-identificadores
@@ -42,7 +41,7 @@ son ignorados por el analizador léxico, no dando lugar a ser conocida por el an
 No se conoce a los comentarios en las gramáticas, tanto sintáctica como léxica, como elementos que conformen a
 alguna de estas dos categorías en cuestión.
 
-------------------------------------------------------- De acá para abajo son cosas con fines de borrador -------------------------------------------------------
+------------------------------------------------------- ### De acá para abajo son cosas con fines de borrador ### -------------------------------------------------------
 Nota para el desarrollador:
 Pre) El axioma se ubica abajo de todo (programa-mini).
 1) <- no es un operador en el lenguaje micro. La asignación en el lenguaje micro
@@ -88,3 +87,62 @@ operador-unario:
 	-
 ----- fin forma 1
 -------------------------------------------------------
+expresion-unaria:
+	primaria
+	- primaria
+-------------------------------------------------------
+
+----------------------- Original -----------------------
+expresion-multiplicativa:
+	primaria
+	expresion-multiplicativa * primaria
+	expresion-multiplicativa / primaria
+----------------------- Original -----------------------
+----------------------- Con conversión -----------------
+A: expresion-multiplicativa
+beta: primaria
+alfa1: * primaria
+alfa2: / primaria
+
+Desde:
+A -> beta | A alfa1 | A alfa2
+
+Hacia:
+A -> beta A'
+A' -> alfa1 A' | alfa2 A' | eps
+
+expresion-multiplicativa:
+	primaria resto-multiplicativa(sub(opt))
+
+resto-multiplicativa:
+	* primaria resto-multiplicativa(sub(opt))
+	/ primaria resto-multiplicativa(sub(opt))
+----------------------- Con conversión -----------------
+
+----------------------- Original -----------------------
+expresion-aditiva:
+	expresion-multiplicativa
+	expresion-aditiva + expresion-multiplicativa
+	expresion-aditiva - expresion-multiplicativa
+----------------------- Original -----------------------
+----------------------- Con conversión -----------------
+A: expresion-aditivia
+beta: expresion-multiplicativa
+alfa1: + expresion-multiplicativa
+alfa2: - expresion-multiplicativa
+
+Desde:
+A -> beta | A alfa1 | A alfa2
+
+Hacia:
+A -> beta A'
+A' -> alfa1 A' | alfa2 A' | eps
+
+expresion-aditiva:
+	expresion-multiplicativa resto-aditiva(sub(opt))
+
+resto-aditivia:
+	+ expresion-multiplicativa resto-aditiva(sub(opt))
+	- expresion-multiplicativa resto-aditiva(sub(opt))
+----------------------- Con conversión -----------------
+
