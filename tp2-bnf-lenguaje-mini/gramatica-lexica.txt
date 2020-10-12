@@ -1,0 +1,27 @@
+token:
+  identificador
+  palabraReservada
+  expresion-aditiva
+  asignacion
+  caracterPuntuacion
+
+identificador:
+  letra[letra digito]?
+
+letra:
+  [a-z] [A-Z]
+
+digito:
+  [0-9]
+
+palabraReservada:
+  [programa fin-prog declarar leer escribir]
+
+expresion-aditiva:
+  [+ -]
+
+asignacion:
+  <-
+
+caracterPuntuacion:
+  [; ()] 
