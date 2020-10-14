@@ -145,4 +145,7 @@ resto-aditivia:
 	+ expresion-multiplicativa resto-aditiva(sub(opt))
 	- expresion-multiplicativa resto-aditiva(sub(opt))
 ----------------------- Con conversión -----------------
-
+expresion-aditiva:
+	expresion-multiplicativa
+	expresion-aditiva + expresion-multiplicativa
+	expresion-aditiva - expresion-multiplicativa
