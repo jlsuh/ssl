@@ -5,18 +5,14 @@ primaria:
 	- expresion-aditiva
 
 expresion-multiplicativa:
-	primaria resto-multiplicativa(sub(opt))
-
-resto-multiplicativa:
-	* primaria resto-multiplicativa(sub(opt))
-	/ primaria resto-multiplicativa(sub(opt))
+	primaria
+	expresion-multiplicativa * primaria
+	expresion-multiplicativa / primaria
 
 expresion-aditiva:
-	expresion-multiplicativa resto-aditiva(sub(opt))
-
-resto-aditiva:
-	+ expresion-multiplicativa resto-aditiva(sub(opt))
-	- expresion-multiplicativa resto-aditiva(sub(opt))
+	expresion-multiplicativa
+	expresion-aditiva + expresion-multiplicativa
+	expresion-aditiva - expresion-multiplicativa
 
 lista-identificadores:
 	identificador , lista-identificadores
@@ -149,3 +145,20 @@ expresion-aditiva:
 	expresion-multiplicativa
 	expresion-aditiva + expresion-multiplicativa
 	expresion-aditiva - expresion-multiplicativa
+
+----
+expresion-multiplicativa:
+	primaria resto-multiplicativa(sub(opt))
+
+resto-multiplicativa:
+	* primaria resto-multiplicativa(sub(opt))
+	/ primaria resto-multiplicativa(sub(opt))
+
+----
+expresion-aditiva:
+	expresion-multiplicativa resto-aditiva(sub(opt))
+
+resto-aditiva:
+	+ expresion-multiplicativa resto-aditiva(sub(opt))
+	- expresion-multiplicativa resto-aditiva(sub(opt))
+

@@ -107,32 +107,25 @@
 
   <em|expresion-multiplicativa>:
 
-  \ \ \ \ \ \ \ \ <em|expresion-primaria resto-multiplicativa<math|<rsub|opt>>>
+  \ \ \ \ \ \ \ \ <em|primaria>
+
+  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa> <strong|*> <em|primaria>
+
+  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa> <strong|/> <em|primaria>
 
   \;
 
-  <em|resto-multiplicativa>:
-
-  \ \ \ \ \ \ \ \ <strong|*> <em|primaria
-  resto-multiplicativa<math|<rsub|opt>>>
-
-  \ \ \ \ \ \ \ \ <strong|/> <em|primaria
-  resto-multiplicativa<math|<rsub|opt>>>
+  \;
 
   <em|expresion-aditiva>:
 
-  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa
-  resto-aditiva<math|<rsub|opt>>>
+  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa>
 
-  \;
+  \ \ \ \ \ \ \ \ <em|expresion-aditiva> <strong|+>
+  <em|expresion-multiplicativa>
 
-  <em|resto-aditiva>:
-
-  \ \ \ \ \ \ \ \ <strong|+> <em|expresion-multiplicativa
-  resto-aditiva<math|<rsub|opt>>>
-
-  \ \ \ \ \ \ \ \ <strong|\U> <em|expresion-multiplicativa
-  resto-aditiva<math|<rsub|opt>>>
+  \ \ \ \ \ \ \ \ <em|expresion-aditiva> <strong|->
+  <em|expresion-multiplicativa>
 
   \;
 
@@ -292,7 +285,7 @@
     <associate|auto-2|<tuple|2|2>>
     <associate|auto-3|<tuple|3|3>>
     <associate|auto-4|<tuple|4|4>>
-    <associate|auto-5|<tuple|5|5>>
+    <associate|auto-5|<tuple|5|4>>
   </collection>
 </references>
 
