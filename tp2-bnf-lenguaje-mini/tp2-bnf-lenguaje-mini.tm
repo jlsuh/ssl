@@ -175,6 +175,12 @@
 
   \ \ \ \ \ \ \ \ <em|constante-entera>
 
+  <\em>
+    \ \ \ \ \ \ <space|1em>operador
+
+    \ \ \ \ \ \ \ <space|1em>caracter-puntuacion
+  </em>
+
   \;
 
   <em|identificador>:
@@ -209,6 +215,18 @@
   <em|resto-constante-entera>:
 
   \ \ \ \ \ \ \ \ <em|digito-decimal resto-constante-entera><math|<rsub|opt>>
+
+  \;
+
+  <em|operador>: <em|one of>
+
+  \ \ \ \ \ \ \ \ <strong|+<space|1em>-<space|1em>*<space|1em>/<space|1em>\<less\>->
+
+  \;
+
+  <em|caracter-puntuacion>: <em|one of>
+
+  \ \ \ \ \ \ \ \ <strong|(<space|1em>)<space|1em>,<space|1em>;>
 
   \;
 
@@ -247,9 +265,9 @@
   Los comentarios, que son la sucesión de símbolos formados principalmente
   por el doble numeral (##) como prefijo, seguidos de la sucesión de símbolos
   propiamente dichas, son ignorados por el analizador léxico, no dando lugar
-  a ser conocida por el analizar sintáctico. En otras palabras, el scanner no
-  tendrá en ningún momento un \Ptoken comentario\Q como resultado, ni tampoco
-  el parser tendrá como entrada un \Ptoken comentario\Q.
+  a ser conocida por el analizador sintáctico. En otras palabras, el scanner
+  no tendrá en ningún momento un \Ptoken comentario\Q como resultado, ni
+  tampoco el parser tendrá como entrada un \Ptoken comentario\Q.
 
   En conclusión, un comentario no es un elemento léxico, ni tampoco
   sintáctico.
@@ -284,8 +302,8 @@
     <associate|auto-1|<tuple|1|2>>
     <associate|auto-2|<tuple|2|2>>
     <associate|auto-3|<tuple|3|3>>
-    <associate|auto-4|<tuple|4|4>>
-    <associate|auto-5|<tuple|5|4>>
+    <associate|auto-4|<tuple|4|5>>
+    <associate|auto-5|<tuple|5|5>>
   </collection>
 </references>
 
