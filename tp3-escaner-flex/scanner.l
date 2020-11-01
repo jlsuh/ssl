@@ -28,9 +28,9 @@ fin-prog                              return tokenFinProg;
 ")"                                   return ')';
 ","                                   return ',';
 ";"                                   return ';';
-{Espacio}+                            ;
-##.*                                  ;
 {Otros}+                              return tokenErrorComun;
 {Letra}({Letra}|{Digito}|{Otros})*    return tokenErrorIdentificador;
 (0|[1-9]{Digito}*)({Letra}|{Digito})* return tokenErrorConstante;
+{Espacio}+                            ;
+##.*                                  ;
 

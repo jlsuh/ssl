@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "scanner.h"
 
 int main()
@@ -15,76 +16,80 @@ int main()
     TOKEN token;
 
     do {
+        char resultado[50];
         token = yylex();
-        switch (token) {
+        switch (token)
+        {
             case tokenLeer:
-                puts("Token: Leer");
+                strcpy(resultado, "Token: Leer");
             break;
             case tokenDeclarar:
-                puts("Token: Declarar");
+                strcpy(resultado, "Token: Declarar");
             break;
             case tokenEscribir:
-                puts("Token: Escribir");
+                strcpy(resultado, "Token: Escribir");
             break;
             case tokenPrograma:
-                puts("Token: Programa");
+                strcpy(resultado, "Token: Programa");
             break;
             case tokenFinProg:
-                puts("Token: Fin-Prog");
+                strcpy(resultado, "Token: Fin-Prog");
             break;
             case tokenIdentificador:
-                puts("Token: Identificador\tlexema: ");
-                puts(yytext);
+                strcpy(resultado, "Token: Identificador\tlexema: ");
+                strcat(resultado, yytext);
             break;
             case tokenConstanteEntera:
-                puts("Token: Constante\tlexema: ");
-                puts(yytext);
+                strcpy(resultado, "Token: Constante\tlexema: ");
+                strcat(resultado, yytext);
             break;
             case tokenAsig:
-                puts("Token: Asignación");
+                strcpy(resultado, "Token: Asignación");
             break;
             case '+':
-                puts("Token: \'+\'");
+                strcpy(resultado, "Token: \'+\'");
             break;
             case '-':
-                puts("Token: \'-\'");
+                strcpy(resultado, "Token: \'-\'");
             break;
             case '*':
-                puts("Token: \'*\'");
+                strcpy(resultado, "Token: \'*\'");
             break;
             case '/':
-                puts("Token: \'/\'");
+                strcpy(resultado, "Token: \'/\'");
             break;
             case '(':
-                puts("Token: \'(\'");
+                strcpy(resultado, "Token: \'(\'");
             break;
             case ')':
-                puts("Token: \')\'");
+                strcpy(resultado, "Token: \')\'");
             break;
             case ',':
-                puts("Token: \',\'");
+                strcpy(resultado, "Token: \',\'");
             break;
             case ';':
-                puts("Token: \';\'");
+                strcpy(resultado, "Token: \';\'");
             break;
             case tokenErrorComun:
-                puts("Error léxico: cadena desconocida: ");
-                puts(yytext);
+                strcpy(resultado, "Error léxico: cadena desconocida: ");
+                strcat(resultado, yytext);
             break;
             case tokenErrorIdentificador:
-                puts("Error léxico: identificador inválido: ");
-                puts(yytext);
+                strcpy(resultado, "Error léxico: identificador inválido: ");
+                strcat(resultado, yytext);
             break;
             case tokenErrorConstante:
-                puts("Error léxico: constante inválida: ");
-                puts(yytext);
+                strcpy(resultado, "Error léxico: constante inválida: ");
+                strcat(resultado, yytext);
+            break;
+            case FDT:
+                strcpy(resultado, "Token: Fin de Archivo");
             break;
         }
+        
+        puts(resultado);
+        
     } while (token != FDT);
-    
-    if(token == FDT)
-        puts("Token: Fin de Archivo");
-    
-    return EXIT_SUCCESS;
 
+    return EXIT_SUCCESS;
 }
