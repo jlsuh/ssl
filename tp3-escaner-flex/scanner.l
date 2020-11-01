@@ -17,7 +17,7 @@ leer                                  return tokenLeer;
 escribir                              return tokenEscribir;
 programa                              return tokenPrograma;
 fin-prog                              return tokenFinProg;
-{Letra}[{Letra}{Digito}]*             return tokenIdentificador;
+{Letra}({Letra}|{Digito})*             return tokenIdentificador;
 (0|[1-9]{Digito}*)                    return tokenConstanteEntera;
 "+"                                   return '+';
 "-"                                   return '-';
@@ -30,7 +30,7 @@ fin-prog                              return tokenFinProg;
 ";"                                   return ';';
 {Espacio}+                            ;
 ##.*                                  ;
-{Otros}*                              return tokenErrorComun;
+{Otros}+                              return tokenErrorComun;
 {Letra}[{Letra}{Digito}]*{Otros}      return tokenErrorIdentificador;
-(0|[1-9]{Digito}*)[{Letra}{Digito}]*  return tokenErrorConstante;
+(0|[1-9]{Digito}*)[{Letra}{Digito}]+  return tokenErrorConstante;
 
