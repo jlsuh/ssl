@@ -12,11 +12,11 @@
 int main()
 {
 
-	TOKEN token;
+    TOKEN token;
 
     do {
-		token = yylex();
-		switch (token) {
+        token = yylex();
+        switch (token) {
             case tokenLeer:
                 puts("Token: Leer");
             break;
@@ -49,22 +49,22 @@ int main()
             case '-':
                 puts("Token: \'-\'");
             break;
-			case '*':
+            case '*':
                 puts("Token: \'*\'");
             break;
-			case '/':
+            case '/':
                 puts("Token: \'/\'");
             break;
-			case '(':
+            case '(':
                 puts("Token: \'(\'");
             break;
-			case ')':
+            case ')':
                 puts("Token: \')\'");
             break;
-			case ',':
+            case ',':
                 puts("Token: \',\'");
             break;
-			case ';':
+            case ';':
                 puts("Token: \';\'");
             break;
             case tokenErrorComun:
@@ -79,10 +79,12 @@ int main()
                 puts("Error léxico: constante inválida: ");
                 puts(yytext);
             break;
-		}
-	} while (token != FDT);
+        }
+    } while (token != FDT);
     
-    printf("holis\n");
+    if(token == FDT)
+        puts("Token: Fin de Archivo");
+    
     return EXIT_SUCCESS;
-    
+
 }
