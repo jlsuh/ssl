@@ -1,0 +1,25 @@
+Token: Programa
+Token: Identificador	lexema: dclarar
+Token: '('
+Token: Identificador	lexema: var
+Token: ')'
+Token: ';'
+Error léxico: identificador inválido: var<
+Token: '-'
+Token: Constante	lexema: 2
+Token: '*'
+Token: Constante	lexema: 34
+Token: '-'
+Token: Constante	lexema: 2345
+Token: '/'
+Token: Constante	lexema: 2
+Token: ';'
+Token: Escribir
+Token: '('
+Token: Identificador	lexema: total
+Token: '/'
+Token: Constante	lexema: 2
+Token: ')'
+Token: ';'
+Token: Fin-Prog
+Token: Fin de Archivo

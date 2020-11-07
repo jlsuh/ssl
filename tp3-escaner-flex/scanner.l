@@ -9,7 +9,7 @@
 Digito              [[:digit:]]
 Letra               [[:alpha:]]
 Espacio             [[:space:]]
-Otros               [[:^alnum:]]{-}[[:space:]]{-}[\+\-\*"/"]{-}[\(\);,]
+Otros               [[:^alnum:]]{-}[[:space:]]{-}[\+\-*/]{-}[\(\);,]
 
 %%
 declarar                              return tokenDeclarar;
