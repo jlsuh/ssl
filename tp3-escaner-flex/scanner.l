@@ -35,4 +35,3 @@ fin-prog                                                        return tokenFinP
 {ConstanteEntera}({Letra}|{Digito})*                            return tokenErrorConstante;
 {Espacio}+                                                      ;
 ##.*                                                            ;
-
