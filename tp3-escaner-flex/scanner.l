@@ -9,7 +9,9 @@
 Digito              [[:digit:]]
 Letra               [[:alpha:]]
 Espacio             [[:space:]]
-Otros               [[:^alnum:]]{-}[[:space:]]{-}[\+\-*/]{-}[\(\);,]{-}['<\-']
+Otros               [[:^alnum:]]{-}[[:space:]]{-}[-+*/();,]
+Identificador       {Letra}({Letra}|{Digito})*
+ConstanteEntera     (0|[1-9]{Digito}*)
 
 %%
 declarar                                                        return tokenDeclarar;
@@ -17,8 +19,8 @@ leer                                                            return tokenLeer
 escribir                                                        return tokenEscribir;
 programa                                                        return tokenPrograma;
 fin-prog                                                        return tokenFinProg;
-{Letra}({Letra}|{Digito})*                                      return tokenIdentificador;
-(0|[1-9]{Digito}*)                                              return tokenConstanteEntera;
+{Identificador}                                                 return tokenIdentificador;
+{ConstanteEntera}                                               return tokenConstanteEntera;
 "+"                                                             return '+';
 "-"                                                             return '-';
 "*"                                                             return '*';
@@ -29,7 +31,8 @@ fin-prog                                                        return tokenFinP
 ","                                                             return ',';
 ";"                                                             return ';';
 {Otros}+                                                        return tokenErrorComun;
-{Letra}({Letra}|{Digito})*{Otros}+({Letra}|{Digito}|{Otros})*   return tokenErrorIdentificador;
-(0|[1-9]{Digito}*)({Letra}|{Digito})*                           return tokenErrorConstante;
+{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               return tokenErrorIdentificador;
+{ConstanteEntera}({Letra}|{Digito})*                            return tokenErrorConstante;
 {Espacio}+                                                      ;
 ##.*                                                            ;
+
