@@ -9,7 +9,7 @@
 Digito              [[:digit:]]
 Letra               [[:alpha:]]
 Espacio             [[:space:]]
-Otros               [[:^alnum:]]{-}[[:space:]]{-}[-+*/();,]
+Otros               [[:^alnum:]]{-}[[:space:]]{-}[-+*/();,<]
 Identificador       {Letra}({Letra}|{Digito})*
 ConstanteEntera     (0|[1-9]{Digito}*)
 
@@ -35,3 +35,4 @@ fin-prog                                                        return tokenFinP
 {ConstanteEntera}({Letra}|{Digito})*                            return tokenErrorConstante;
 {Espacio}+                                                      ;
 ##.*                                                            ;
+.                                                               return tokenErrorComun;
