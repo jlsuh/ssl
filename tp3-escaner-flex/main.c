@@ -70,18 +70,6 @@ int main()
             case ';':
                 strcpy(resultado, "Token: \';\'");
             break;
-            case tokenErrorComun:
-                strcpy(resultado, "Error léxico: cadena desconocida: ");
-                strcat(resultado, yytext);
-            break;
-            case tokenErrorIdentificador:
-                strcpy(resultado, "Error léxico: identificador inválido: ");
-                strcat(resultado, yytext);
-            break;
-            case tokenErrorConstante:
-                strcpy(resultado, "Error léxico: constante inválida: ");
-                strcat(resultado, yytext);
-            break;
             case FDT:
                 strcpy(resultado, "Token: Fin de Archivo");
             break;

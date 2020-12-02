@@ -30,9 +30,9 @@ fin-prog                                                        return tokenFinP
 ")"                                                             return ')';
 ","                                                             return ',';
 ";"                                                             return ';';
-{Otros}+                                                        return tokenErrorComun;
-{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               return tokenErrorIdentificador;
-{ConstanteEntera}({Letra}|{Digito})*                            return tokenErrorConstante;
+{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               printf("Error léxico: identificador inválido: %s\n", yytext);
+{ConstanteEntera}({Letra}|{Digito})*                            printf("Error léxico: constante inválida: %s\n", yytext);
 {Espacio}+                                                      ;
 ##.*                                                            ;
-.                                                               return tokenErrorComun;
+{Otros}+                                                        |
+.                                                               printf("Error léxico: cadena desconocida: %s\n", yytext);

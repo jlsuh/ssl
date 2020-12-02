@@ -3,6 +3,5 @@ enum token {FDT,
             tokenIdentificador,
             tokenConstanteEntera,
             tokenAsig, // Asignacion
-            tokenErrorComun, tokenErrorIdentificador, tokenErrorConstante,
             };
 typedef enum token TOKEN;
