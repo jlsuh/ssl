@@ -107,11 +107,13 @@
 
   <em|expresion-multiplicativa>:
 
-  \ \ \ \ \ \ \ \ <em|primaria>
+  \ \ \ \ \ \ \ \ <em|expresion-primaria>
 
-  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa> <strong|*> <em|primaria>
+  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa> <strong|*>
+  <em|expresion-primaria>
 
-  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa> <strong|/> <em|primaria>
+  \ \ \ \ \ \ \ \ <em|expresion-multiplicativa> <strong|/>
+  <em|expresion-primaria>
 
   \;
 
@@ -139,8 +141,8 @@
 
   <em|sentencia>:
 
-  \ \ \ \ \ \ \ \ <em|identificador> <strong|\<less\>\U>
-  <em|expresion-aditiva> <strong|;>
+  \ \ \ \ \ \ \ \ <em|identificador> <em|asignacion> <em|expresion-aditiva>
+  <strong|;>
 
   \ \ \ \ \ \ \ \ <strong|declarar> <em|identificador> <strong|;>
 
@@ -178,7 +180,9 @@
   <\em>
     \ \ \ \ \ \ <space|1em>operador
 
-    \ \ \ \ \ \ \ <space|1em>caracter-puntuacion
+    \ \ \ \ \ \ <space|1em>caracter-puntuacion
+
+    <space|3em>asignacion
   </em>
 
   \;
@@ -197,6 +201,12 @@
 
   \;
 
+  <with|font-shape|italic|asginacion>:
+
+  <space|2em><with|font-shape|italic|\<less\>\U>
+
+  \;
+
   <em|palabra-reservada>: <em|one of>
 
   \ \ \ \ \ \ \ \ <strong|leer<space|1em>declarar<space|1em>escribir<space|1em>programa<space|1em>fin-prog>
@@ -205,34 +215,19 @@
 
   <em|constante-entera>:
 
-  \ \ \ \ \ \ \ \ <strong|0>
-
-  \ \ \ \ \ \ \ \ <em|digito-decimal-no-nulo
-  resto-constante-entera><math|<rsub|opt>>
-
-  \;
-
-  <em|resto-constante-entera>:
-
-  \ \ \ \ \ \ \ \ <em|digito-decimal resto-constante-entera><math|<rsub|opt>>
+  \ \ \ \ \ \ \ \ <em|digito-decimal constante-entera><math|<rsub|opt>>
 
   \;
 
   <em|operador>: <em|one of>
 
-  \ \ \ \ \ \ \ \ <strong|+<space|1em>-<space|1em>*<space|1em>/<space|1em>\<less\>->
+  \ \ \ \ \ \ \ \ <strong|+<space|1em>-<space|1em>*<space|1em>/>
 
   \;
 
   <em|caracter-puntuacion>: <em|one of>
 
   \ \ \ \ \ \ \ \ <strong|(<space|1em>)<space|1em>,<space|1em>;>
-
-  \;
-
-  <em|digito-decimal-no-nulo>: <em|one of>
-
-  \ \ \ \ \ \ \ \ <strong|1<space|1em>2<space|1em>3<space|1em>4<space|1em>5<space|1em>6<space|1em>7<space|1em>8<space|1em>9>
 
   \;
 
@@ -302,7 +297,7 @@
     <associate|auto-1|<tuple|1|2>>
     <associate|auto-2|<tuple|2|2>>
     <associate|auto-3|<tuple|3|3>>
-    <associate|auto-4|<tuple|4|5>>
+    <associate|auto-4|<tuple|4|4>>
     <associate|auto-5|<tuple|5|5>>
   </collection>
 </references>
