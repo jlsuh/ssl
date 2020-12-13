@@ -1,7 +1,7 @@
 enum token {FDT,
-            tokenLeer, tokenDeclarar, tokenEscribir, tokenPrograma, tokenFinProg, //Palabras reservadas
-            tokenIdentificador,
-            tokenConstanteEntera,
-            tokenAsig, // Asignacion
+            LEER, DECLARAR, ESCRIBIR, PROGRAMA, FINPROG,
+            IDENTIFICADOR,
+            CONSTANTE,
+            ASIGNACION,
             };
 typedef enum token TOKEN;

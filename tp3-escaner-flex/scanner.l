@@ -14,18 +14,18 @@ Identificador       {Letra}({Letra}|{Digito})*
 ConstanteEntera     (0|[1-9]{Digito}*)
 
 %%
-declarar                                                        return tokenDeclarar;
-leer                                                            return tokenLeer;
-escribir                                                        return tokenEscribir;
-programa                                                        return tokenPrograma;
-fin-prog                                                        return tokenFinProg;
-{Identificador}                                                 return tokenIdentificador;
-{ConstanteEntera}                                               return tokenConstanteEntera;
+declarar                                                        return DECLARAR;
+leer                                                            return LEER;
+escribir                                                        return ESCRIBIR;
+programa                                                        return PROGRAMA;
+fin-prog                                                        return FINPROG;
+{Identificador}                                                 return IDENTIFICADOR;
+{ConstanteEntera}                                               return CONSTANTE;
 "+"                                                             return '+';
 "-"                                                             return '-';
 "*"                                                             return '*';
 "/"                                                             return '/';
-"<-"                                                            return tokenAsig;
+"<-"                                                            return ASIGNACION;
 "("                                                             return '(';
 ")"                                                             return ')';
 ","                                                             return ',';

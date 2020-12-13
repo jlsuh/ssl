@@ -20,30 +20,30 @@ int main()
         token = yylex();
         switch (token)
         {
-            case tokenLeer:
+            case LEER:
                 strcpy(resultado, "Token: Leer");
             break;
-            case tokenDeclarar:
+            case DECLARAR:
                 strcpy(resultado, "Token: Declarar");
             break;
-            case tokenEscribir:
+            case ESCRIBIR:
                 strcpy(resultado, "Token: Escribir");
             break;
-            case tokenPrograma:
+            case PROGRAMA:
                 strcpy(resultado, "Token: Programa");
             break;
-            case tokenFinProg:
+            case FINPROG:
                 strcpy(resultado, "Token: Fin-Prog");
             break;
-            case tokenIdentificador:
+            case IDENTIFICADOR:
                 strcpy(resultado, "Token: Identificador\tlexema: ");
                 strcat(resultado, yytext);
             break;
-            case tokenConstanteEntera:
+            case CONSTANTE:
                 strcpy(resultado, "Token: Constante\tlexema: ");
                 strcat(resultado, yytext);
             break;
-            case tokenAsig:
+            case ASIGNACION:
                 strcpy(resultado, "Token: Asignación");
             break;
             case '+':
