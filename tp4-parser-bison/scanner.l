@@ -11,7 +11,7 @@ Letra               [[:alpha:]]
 Espacio             [[:space:]]
 Otros               [[:^alnum:]]{-}[[:space:]]{-}[-+*/();,<]
 Identificador       {Letra}({Letra}|{Digito})*
-ConstanteEntera     (0|[1-9]{Digito}*)
+ConstanteEntera     {Digito}+
 
 %%
 declarar                                                        return DECLARAR;
