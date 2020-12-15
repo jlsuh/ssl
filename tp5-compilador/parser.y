@@ -3,10 +3,14 @@
 #include "scanner.h"
 #include "symbol.h"
 #include "semantic.h"
+
+struct simbolo *tabla_simbolos = NULL;
 }
 %code provides{
 void yyerror(const char *);
 extern int yylexerrs;
+extern int yysemerrs;
+extern char msg[120];
 }
 %defines "parser.h"
 %output "parser.c"
@@ -20,33 +24,49 @@ extern int yylexerrs;
 %left '*' '/'
 %precedence NEG
 %%
-programa-mini            : PROGRAMA lista-sentencias FINPROG { if (yynerrs || yylexerrs) YYABORT;}
+programa-mini            : {comenzar();} PROGRAMA lista-sentencias FINPROG { if (yynerrs || yylexerrs) YYABORT; terminar();}
                          ;
 lista-sentencias         : %empty
                          | sentencia lista-sentencias
                          | sentencia
                          ;
-sentencia                : IDENTIFICADOR "<-" expresion-aditiva ';' {printf("asignación\n");}
-                         | DECLARAR IDENTIFICADOR ';' {printf("declarar %s\n", yylval);}
-                         | LEER '(' lista-identificadores ')' ';' {printf("leer\n");}
-                         | ESCRIBIR '(' expresion-aditiva ')' ';' {printf("escribir\n");}
+sentencia                : IDENTIFICADOR "<-" expresion-aditiva ';' { if( asignar($1, $3) ) YYERROR; }
+                         | DECLARAR IDENTIFICADOR ';' { if( declarar($2, 4) ) YYERROR; }
+                         | LEER '(' lista-identificadores ')' ';' // verificación de semántica en no-terminal: lista-identificadores
+                         | ESCRIBIR '(' expresion-aditiva ')' ';' { escribir($3); }
                          | error ';'
                          ;
-lista-identificadores    : IDENTIFICADOR ',' lista-identificadores
-                         | IDENTIFICADOR
+lista-identificadores    : IDENTIFICADOR { if( leer($1) ) YYERROR; } ',' lista-identificadores
+                         | IDENTIFICADOR { if( leer($1) ) YYERROR; }
                          ;
 expresion-aditiva        : expresion-multiplicativa
-                         | expresion-aditiva '+' expresion-multiplicativa {printf("suma\n");}
-                         | expresion-aditiva '-' expresion-multiplicativa {printf("resta\n");}
+                         | expresion-aditiva '+' expresion-multiplicativa
+                           {
+                            char resultado = generar_infijo($1, $3, '+');
+                            $$ = &resultado;
+                           }
+                         | expresion-aditiva '-' expresion-multiplicativa
+                           {
+                            char resultado = generar_infijo($1, $3, '-');
+                            $$ = &resultado;
+                           }
                          ;
 expresion-multiplicativa : expresion-primaria
-                         | expresion-multiplicativa '*' expresion-primaria {printf("multiplicación\n");}
-                         | expresion-multiplicativa '/' expresion-primaria {printf("división\n");}
+                         | expresion-multiplicativa '*' expresion-primaria
+                           {
+                            char resultado = generar_infijo($1, $3, '*');
+                            $$ = &resultado;
+                           }
+                         | expresion-multiplicativa '/' expresion-primaria
+                           {
+                            char resultado = generar_infijo($1, $3, '/');
+                            $$ = &resultado;
+                           }
                          ;
 expresion-primaria       : CONSTANTE
                          | IDENTIFICADOR
-                         | '(' expresion-aditiva ')' {printf("paréntesis\n");}
-                         | '-' expresion-aditiva %prec NEG {printf("inversión\n");}
+                         | '(' expresion-aditiva ')'
+                         | '-' expresion-aditiva %prec NEG { if ( inversion($2) ) YYERROR; }
                          ;
 %%
 /* Informar ocurrencia de un error */

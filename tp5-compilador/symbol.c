@@ -14,7 +14,7 @@ Notas: ver cómo mixear con el resto
 struct simbolo *crear_nuevo_simbolo(const char* nombre_simbolo) {
     struct simbolo *nuevo_simbolo = malloc(sizeof(struct simbolo));
     strcpy(nuevo_simbolo->nombre, nombre_simbolo);
-    strcpy(nuevo_simbolo->tipo, "int");
+    strcpy(nuevo_simbolo->tipo, "Integer");
     nuevo_simbolo->sig = NULL;
     return nuevo_simbolo;
 }

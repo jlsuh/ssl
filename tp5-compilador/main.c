@@ -12,6 +12,7 @@
 
 int yylexerrs = 0;
 extern int yynerrs;
+int yysemerrs = 0;
 
 int main(){
     switch( yyparse() ) {
@@ -25,6 +26,6 @@ int main(){
             printf("Memoria insuficiente\n");
             break;
     }
-    printf("Errores sintácticos: %d - Errores léxicos: %d\n", yynerrs, yylexerrs);
+    printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semánticos: %d\n", yynerrs, yylexerrs, yysemerrs);
     return EXIT_SUCCESS;
 }

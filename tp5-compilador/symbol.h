@@ -3,7 +3,7 @@
 
 struct simbolo {
     char nombre[32];
-    char tipo[3];
+    char tipo[7]; // Solamente del tipo: Integer
     struct simbolo* sig;
 };
 
