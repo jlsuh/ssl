@@ -8,76 +8,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "scanner.h"
+#include "parser.h"
 
-int main()
-{
+int yylexerrs = 0;
+extern int yynerrs;
 
-    TOKEN token;
-
-    do {
-        char resultado[50];
-        token = yylex();
-        switch (token)
-        {
-            case LEER:
-                strcpy(resultado, "Token: Leer");
+int main(){
+    switch( yyparse() ) {
+        case 0:
+            printf("Compilación terminada con éxito\n");
             break;
-            case DECLARAR:
-                strcpy(resultado, "Token: Declarar");
+        case 1:
+            printf("Errores de compilación\n");
             break;
-            case ESCRIBIR:
-                strcpy(resultado, "Token: Escribir");
+        case 2:
+            printf("Memoria insuficiente\n");
             break;
-            case PROGRAMA:
-                strcpy(resultado, "Token: Programa");
-            break;
-            case FINPROG:
-                strcpy(resultado, "Token: Fin-Prog");
-            break;
-            case IDENTIFICADOR:
-                strcpy(resultado, "Token: Identificador\tlexema: ");
-                strcat(resultado, yytext);
-            break;
-            case CONSTANTE:
-                strcpy(resultado, "Token: Constante\tlexema: ");
-                strcat(resultado, yytext);
-            break;
-            case ASIGNACION:
-                strcpy(resultado, "Token: Asignación");
-            break;
-            case '+':
-                strcpy(resultado, "Token: \'+\'");
-            break;
-            case '-':
-                strcpy(resultado, "Token: \'-\'");
-            break;
-            case '*':
-                strcpy(resultado, "Token: \'*\'");
-            break;
-            case '/':
-                strcpy(resultado, "Token: \'/\'");
-            break;
-            case '(':
-                strcpy(resultado, "Token: \'(\'");
-            break;
-            case ')':
-                strcpy(resultado, "Token: \')\'");
-            break;
-            case ',':
-                strcpy(resultado, "Token: \',\'");
-            break;
-            case ';':
-                strcpy(resultado, "Token: \';\'");
-            break;
-            case FDT:
-                strcpy(resultado, "Token: Fin de Archivo");
-            break;
-        }
-        
-        puts(resultado);
-        
-    } while (token != FDT);
-
+    }
+    printf("Errores sintácticos: %d - Errores léxicos: %d\n", yynerrs, yylexerrs);
     return EXIT_SUCCESS;
 }

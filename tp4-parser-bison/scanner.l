@@ -1,10 +1,14 @@
-%top{
-#include "tokens.h"
-}
+%{
+#include <stdio.h>
+#include <strings.h>
+#include "parser.h"
+char msg[120];
+%}
 %option outfile="scanner.c"
 %option header-file="scanner.h"
 %option noinput
 %option nounput
+%option yylineno
 
 Digito              [[:digit:]]
 Letra               [[:alpha:]]
@@ -14,25 +18,25 @@ Identificador       {Letra}({Letra}|{Digito})*
 ConstanteEntera     {Digito}+
 
 %%
-declarar                                                        return DECLARAR;
-leer                                                            return LEER;
-escribir                                                        return ESCRIBIR;
-programa                                                        return PROGRAMA;
-fin-prog                                                        return FINPROG;
-{Identificador}                                                 return IDENTIFICADOR;
-{ConstanteEntera}                                               return CONSTANTE;
+declarar                                                        {yylval = strdup(yytext); return DECLARAR;}
+leer                                                            {yylval = strdup(yytext); return LEER;}
+escribir                                                        {yylval = strdup(yytext); return ESCRIBIR;}
+programa                                                        {yylval = strdup(yytext); return PROGRAMA;}
+fin-prog                                                        {yylval = strdup(yytext); return FINPROG;}
+{Identificador}                                                 {yylval = strdup(yytext); return IDENTIFICADOR;}
+{ConstanteEntera}                                               {yylval = strdup(yytext); return CONSTANTE;}
 "+"                                                             return '+';
 "-"                                                             return '-';
 "*"                                                             return '*';
 "/"                                                             return '/';
-"<-"                                                            return ASIGNACION;
+"<-"                                                            {yylval = strdup(yytext); return ASIGNACION;}
 "("                                                             return '(';
 ")"                                                             return ')';
 ","                                                             return ',';
 ";"                                                             return ';';
-{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               printf("Error léxico: identificador inválido: %s\n", yytext);
-{ConstanteEntera}({Letra}|{Digito})*                            printf("Error léxico: constante inválida: %s\n", yytext);
+{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               {yylexerrs++; sprintf(msg, "Error léxico: identificador inválido: %s", yytext); yyerror(msg);}
+{ConstanteEntera}({Letra}|{Digito})*                            {yylexerrs++; sprintf(msg, "Error léxico: constante inválida: %s", yytext); yyerror(msg);}
 {Espacio}+                                                      ;
 ##.*                                                            ;
 {Otros}+                                                        |
-.                                                               printf("Error léxico: cadena desconocida: %s\n", yytext);
+.                                                               {yylexerrs++; sprintf(msg, "Error léxico: cadena desconocida: %s", yytext); yyerror(msg);}
