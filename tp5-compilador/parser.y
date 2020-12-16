@@ -5,6 +5,7 @@
 #include "semantic.h"
 
 struct simbolo *tabla_simbolos = NULL;
+char resultado;
 }
 %code provides{
 void yyerror(const char *);
@@ -28,45 +29,42 @@ programa-mini            : {comenzar();} PROGRAMA lista-sentencias FINPROG { if 
                          ;
 lista-sentencias         : %empty
                          | sentencia lista-sentencias
-                         | sentencia
                          ;
-sentencia                : IDENTIFICADOR "<-" expresion-aditiva ';' { if( asignar($1, $3) ) YYERROR; }
+sentencia                : IDENTIFICADOR "<-" expresion ';' { if( asignar($1, $3) ) YYERROR; }
                          | DECLARAR IDENTIFICADOR ';' { if( declarar($2, 4) ) YYERROR; }
                          | LEER '(' lista-identificadores ')' ';' // verificación de semántica en no-terminal: lista-identificadores
-                         | ESCRIBIR '(' expresion-aditiva ')' ';' { escribir($3); }
+                         | ESCRIBIR '(' expresion ')' ';' { escribir($3); }
                          | error ';'
                          ;
 lista-identificadores    : IDENTIFICADOR { if( leer($1) ) YYERROR; } ',' lista-identificadores
                          | IDENTIFICADOR { if( leer($1) ) YYERROR; }
                          ;
-expresion-aditiva        : expresion-multiplicativa
-                         | expresion-aditiva '+' expresion-multiplicativa
+expresion                : expresion-primaria
+                         | expresion '+' expresion
                            {
-                            char resultado = generar_infijo($1, $3, '+');
+                            resultado = generar_infijo($1, $3, '+');
                             $$ = &resultado;
                            }
-                         | expresion-aditiva '-' expresion-multiplicativa
+                         | expresion '-' expresion
                            {
-                            char resultado = generar_infijo($1, $3, '-');
+                            resultado = generar_infijo($1, $3, '-');
                             $$ = &resultado;
                            }
-                         ;
-expresion-multiplicativa : expresion-primaria
-                         | expresion-multiplicativa '*' expresion-primaria
+                         | expresion '*' expresion
                            {
-                            char resultado = generar_infijo($1, $3, '*');
+                            resultado = generar_infijo($1, $3, '*');
                             $$ = &resultado;
                            }
-                         | expresion-multiplicativa '/' expresion-primaria
+                         | expresion '/' expresion
                            {
-                            char resultado = generar_infijo($1, $3, '/');
+                            resultado = generar_infijo($1, $3, '/');
                             $$ = &resultado;
                            }
                          ;
 expresion-primaria       : CONSTANTE
                          | IDENTIFICADOR
-                         | '(' expresion-aditiva ')'
-                         | '-' expresion-aditiva %prec NEG { if ( inversion($2) ) YYERROR; }
+                         | '(' expresion ')'
+                         | '-' expresion %prec NEG { if ( inversion($2) ) YYERROR; }
                          ;
 %%
 /* Informar ocurrencia de un error */
