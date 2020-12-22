@@ -29,11 +29,11 @@ sentencia                : IDENTIFICADOR "<-" expresion ';' {printf("asignación
                          | ESCRIBIR '(' lista-expresion ')' ';' {printf("escribir\n");}
                          | error ';'
                          ;
-lista-identificadores    : IDENTIFICADOR ',' lista-identificadores
-                         | IDENTIFICADOR
-                         ;
 lista-expresion          : expresion ',' lista-expresion
                          | expresion
+                         ;
+lista-identificadores    : IDENTIFICADOR ',' lista-identificadores
+                         | IDENTIFICADOR
                          ;
 // gramática achatada //
 expresion                : expresion-primaria
