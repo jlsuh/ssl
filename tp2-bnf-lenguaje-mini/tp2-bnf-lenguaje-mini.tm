@@ -139,6 +139,15 @@
 
   \;
 
+  <with|font-shape|italic|lista-expresiones>:
+
+  <space|2em><with|font-shape|italic|expresion-aditiva>
+  <with|font-series|bold|,> <with|font-shape|italic|lista-expresiones>
+
+  <space|2em><with|font-shape|italic|expresion-aditiva>
+
+  \;
+
   <em|sentencia>:
 
   \ \ \ \ \ \ \ \ <em|identificador> <em|asignacion> <em|expresion-aditiva>
@@ -149,7 +158,7 @@
   \ \ \ \ \ \ \ \ <strong|leer> <strong|(> <em|lista-identificadores>
   <strong|)> <strong|;>
 
-  \ \ \ \ \ \ \ \ <strong|escribir> <strong|(> <em|expresion-aditiva>
+  \ \ \ \ \ \ \ \ <strong|escribir> <strong|(> <em|lista-expresiones>
   <strong|)> <name|<strong|;>>
 
   \;
@@ -297,7 +306,7 @@
     <associate|auto-1|<tuple|1|2>>
     <associate|auto-2|<tuple|2|2>>
     <associate|auto-3|<tuple|3|3>>
-    <associate|auto-4|<tuple|4|4>>
+    <associate|auto-4|<tuple|4|5>>
     <associate|auto-5|<tuple|5|5>>
   </collection>
 </references>
