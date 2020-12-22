@@ -26,11 +26,14 @@ lista-sentencias         : %empty
 sentencia                : IDENTIFICADOR "<-" expresion ';' {printf("asignación\n");}
                          | DECLARAR IDENTIFICADOR ';' {printf("declarar %s\n", yylval);}
                          | LEER '(' lista-identificadores ')' ';' {printf("leer\n");}
-                         | ESCRIBIR '(' expresion ')' ';' {printf("escribir\n");}
+                         | ESCRIBIR '(' lista-expresion ')' ';' {printf("escribir\n");}
                          | error ';'
                          ;
 lista-identificadores    : IDENTIFICADOR ',' lista-identificadores
                          | IDENTIFICADOR
+                         ;
+lista-expresion          : expresion ',' lista-expresion
+                         | expresion
                          ;
 // gramática achatada //
 expresion                : expresion-primaria
