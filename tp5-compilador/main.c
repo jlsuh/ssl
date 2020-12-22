@@ -28,4 +28,4 @@ int main(){
     }
     printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semánticos: %d\n", yynerrs, yylexerrs, yysemerrs);
     return EXIT_SUCCESS;
-}
+} 

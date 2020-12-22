@@ -33,8 +33,11 @@ lista-sentencias         : %empty
 sentencia                : IDENTIFICADOR "<-" expresion ';' { if( asignar($1, $3) ) YYERROR; }
                          | DECLARAR IDENTIFICADOR ';' { if( declarar($2, 4) ) YYERROR; }
                          | LEER '(' lista-identificadores ')' ';' // verificación de semántica en no-terminal: lista-identificadores
-                         | ESCRIBIR '(' expresion ')' ';' { escribir($3); }
+                         | ESCRIBIR '(' lista-expresion ')' ';' { escribir($3); }
                          | error ';'
+                         ;
+lista-expresion          : expresion ',' lista-expresion
+                         | expresion
                          ;
 lista-identificadores    : IDENTIFICADOR { if( leer($1) ) YYERROR; } ',' lista-identificadores
                          | IDENTIFICADOR { if( leer($1) ) YYERROR; }
