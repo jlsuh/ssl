@@ -18,7 +18,7 @@ extern int yylexerrs;
 %left '*' '/'
 %precedence NEG
 %%
-programa-mini            : PROGRAMA lista-sentencias FINPROG { if (yynerrs || yylexerrs) YYABORT;}
+programa-mini            : PROGRAMA lista-sentencias FINPROG { if (yynerrs || yylexerrs) YYABORT; else YYACCEPT; }
                          ;
 lista-sentencias         : %empty
                          | sentencia lista-sentencias
@@ -29,23 +29,21 @@ sentencia                : IDENTIFICADOR "<-" expresion ';' {printf("asignación
                          | ESCRIBIR '(' lista-expresion ')' ';' {printf("escribir\n");}
                          | error ';'
                          ;
-lista-expresion          : expresion ',' lista-expresion
+lista-expresion          : lista-expresion ',' expresion
                          | expresion
                          ;
-lista-identificadores    : IDENTIFICADOR ',' lista-identificadores
+lista-identificadores    : lista-identificadores ',' IDENTIFICADOR
                          | IDENTIFICADOR
                          ;
 // gramática achatada //
-expresion                : expresion-primaria
-                         | expresion '+' expresion {printf("suma\n");}
+expresion                : expresion '+' expresion {printf("suma\n");}
                          | expresion '-' expresion {printf("resta\n");}
                          | expresion '*' expresion {printf("multiplicación\n");}
                          | expresion '/' expresion {printf("división\n");}
-                         ;
-expresion-primaria       : CONSTANTE
-                         | IDENTIFICADOR
-                         | '(' expresion ')' {printf("paréntesis\n");}
                          | '-' expresion %prec NEG {printf("inversión\n");}
+                         | '(' expresion ')' {printf("paréntesis\n");}
+                         | IDENTIFICADOR
+                         | CONSTANTE
                          ;
 %%
 /* Informar ocurrencia de un error */
