@@ -16,10 +16,10 @@ int yysemerrs = 0;
 
 int main(){
     switch( yyparse() ) {
-        case 0:
+        case 0: // YYACCEPT
             printf("Compilación terminada con éxito\n");
             break;
-        case 1:
+        case 1: // YYABORT
             printf("Errores de compilación\n");
             break;
         case 2:

@@ -11,11 +11,11 @@ char resultado;
 void yyerror(const char *);
 extern int yylexerrs;
 extern int yysemerrs;
-extern char msg[120];
+extern char buffer[120];
 }
 %defines "parser.h"
 %output "parser.c"
-%define api.value.type {char *}
+%define api.value.type {char *} // Registro semántico de tipo: puntero a char
 %define parse.error verbose
 %start programa-mini
 
@@ -25,49 +25,33 @@ extern char msg[120];
 %left '*' '/'
 %precedence NEG
 %%
-programa-mini            : {comenzar();} PROGRAMA lista-sentencias FINPROG { if (yynerrs || yylexerrs) YYABORT; terminar();}
+programa-mini            : { comenzar(); } PROGRAMA lista-sentencias FINPROG { terminar(); if (yynerrs || yylexerrs || yysemerrs) YYABORT; else YYACCEPT; }
                          ;
 lista-sentencias         : %empty
                          | sentencia lista-sentencias
                          ;
-sentencia                : IDENTIFICADOR "<-" expresion ';' { if( asignar($1, $3) ) YYERROR; }
-                         | DECLARAR IDENTIFICADOR ';' { if( declarar($2, 4) ) YYERROR; }
-                         | LEER '(' lista-identificadores ')' ';' // verificación de semántica en no-terminal: lista-identificadores
-                         | ESCRIBIR '(' lista-expresion ')' ';' { escribir($3); }
+sentencia                : identificador "<-" expresion ';' { asignar($1, $3); }
+                         | DECLARAR IDENTIFICADOR ';' { if( declarar($2) ) YYERROR; } // Se activa YYERROR cuando hay redeclaración
+                         | LEER '(' lista-identificadores ')' ';'
+                         | ESCRIBIR '(' lista-expresion ')' ';'
                          | error ';'
                          ;
-lista-expresion          : expresion ',' lista-expresion
-                         | expresion
+lista-expresion          : lista-expresion ',' expresion { escribir($3); }
+                         | expresion { escribir($1); }
                          ;
-lista-identificadores    : IDENTIFICADOR { if( leer($1) ) YYERROR; } ',' lista-identificadores
-                         | IDENTIFICADOR { if( leer($1) ) YYERROR; }
+lista-identificadores    : lista-identificadores ',' identificador { leer($3); }
+                         | identificador { leer($1); }
                          ;
-expresion                : expresion-primaria
-                         | expresion '+' expresion
-                           {
-                            resultado = generar_infijo($1, $3, '+');
-                            $$ = &resultado;
-                           }
-                         | expresion '-' expresion
-                           {
-                            resultado = generar_infijo($1, $3, '-');
-                            $$ = &resultado;
-                           }
-                         | expresion '*' expresion
-                           {
-                            resultado = generar_infijo($1, $3, '*');
-                            $$ = &resultado;
-                           }
-                         | expresion '/' expresion
-                           {
-                            resultado = generar_infijo($1, $3, '/');
-                            $$ = &resultado;
-                           }
+expresion                : expresion '+' expresion {$$ = generar_infijo($1,'+',$3);}
+                         | expresion '-' expresion {$$ = generar_infijo($1,'-',$3);}
+                         | expresion '*' expresion {$$ = generar_infijo($1,'*',$3);}
+                         | expresion '/' expresion {$$ = generar_infijo($1,'/',$3);}
+                         | '-' expresion %prec NEG {$$ = generar_unario($2);}
+                         | '(' expresion ')' { $$ = $2; }
+                         | identificador
+                         | CONSTANTE
                          ;
-expresion-primaria       : CONSTANTE
-                         | IDENTIFICADOR
-                         | '(' expresion ')'
-                         | '-' expresion %prec NEG { if ( inversion($2) ) YYERROR; }
+identificador            : IDENTIFICADOR { if(procesar_id($1)) YYERROR; } // Checkea si ya está declarado
                          ;
 %%
 /* Informar ocurrencia de un error */

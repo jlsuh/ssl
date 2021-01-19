@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <strings.h>
 #include "parser.h"
-char msg[120];
+char buffer[120];
 %}
 %option outfile="scanner.c"
 %option header-file="scanner.h"
@@ -34,9 +34,9 @@ fin-prog                                                        {yylval = strdup
 ")"                                                             return ')';
 ","                                                             return ',';
 ";"                                                             return ';';
-{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               {yylexerrs++; sprintf(msg, "Error léxico: identificador inválido: %s", yytext); yyerror(msg);}
-{ConstanteEntera}({Letra}|{Digito})*                            {yylexerrs++; sprintf(msg, "Error léxico: constante inválida: %s", yytext); yyerror(msg);}
+{Identificador}{Otros}({Letra}|{Digito}|{Otros})*               {yylexerrs++; sprintf(buffer, "Error léxico: identificador inválido: %s", yytext); yyerror(buffer);}
+{ConstanteEntera}({Letra}|{Digito})*                            {yylexerrs++; sprintf(buffer, "Error léxico: constante inválida: %s", yytext); yyerror(buffer);}
 {Espacio}+                                                      ;
 ##.*                                                            ;
 {Otros}+                                                        |
-.                                                               {yylexerrs++; sprintf(msg, "Error léxico: cadena desconocida: %s", yytext); yyerror(msg);}
+.                                                               {yylexerrs++; sprintf(buffer, "Error léxico: cadena desconocida: %s", yytext); yyerror(buffer);}

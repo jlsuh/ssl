@@ -4,12 +4,13 @@
 extern struct simbolo *tabla_simbolos;
 
 void comenzar();
-void terminar();
-int asignar(const char *valor_l, const char *valor_r);
-int declarar(const char *nombre_simbolo, int bytes_reservados);
-int leer(const char *valor_l);
-void escribir(const char *nombre_simbolo);
-char generar_infijo(const char* operando_izq, const char* operando_der, char operador);
-int inversion(const char* nombre_simbolo);
+void terminar ();
+void escribir(char *nombre_simbolo);
+void asignar(char *valor_l, char *valor_r);
+void leer(char *valor_l);
+int procesar_id(char* nombre_simbolo);
+int declarar(char *nombre_simbolo);
+char *generar_infijo(char* operando_izq, int operador, char* operando_der);
+char *generar_unario(char* operando);
 
 #endif // SEMANTIC_H_INCLUDED
