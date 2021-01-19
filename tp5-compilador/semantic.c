@@ -63,12 +63,7 @@ void generar_pseudo(char *codigoPseudo, char *primerParametro, char *segundoPara
 }
 
 char *generar_infijo(char *operandoIzq, int operador, char *operandoDer) {
-    char *aux;
-    sprintf(buffer, "Temp#%d", ++contadorTemporales);
-    aux = strdup(buffer);
-
-    declarar(aux);
-
+    char *temporal = declarar_nuevo_temporal();
     switch(operador) {
         case '+':
             generar_pseudo("ADD", operandoIzq, operandoDer, buffer);
@@ -83,18 +78,18 @@ char *generar_infijo(char *operandoIzq, int operador, char *operandoDer) {
             generar_pseudo("DIV", operandoIzq, operandoDer, buffer);
         break;
     }
-    
-    return aux;
+    return temporal;
 }
 
 char *generar_unario(char *operando) {
-    char *aux;
-    sprintf(buffer, "Temp#%d", ++contadorTemporales);
-    aux = strdup(buffer);
-
-    declarar(aux);
-
+    char *temporal = declarar_nuevo_temporal();
     generar_pseudo("NEG", operando, "", buffer);
+    return temporal;
+}
 
-    return aux;
+char *declarar_nuevo_temporal() {
+    sprintf(buffer, "Temp#%d", ++contadorTemporales);
+    char *temporal = strdup(buffer);
+    declarar(temporal);
+    return temporal;
 }

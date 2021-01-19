@@ -5,7 +5,6 @@
 #include "semantic.h"
 
 struct simbolo *tabla_simbolos = NULL;
-char resultado;
 }
 %code provides {
 void yyerror(const char *mensajeError);
