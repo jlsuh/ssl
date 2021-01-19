@@ -8,7 +8,7 @@ struct simbolo *tabla_simbolos = NULL;
 char resultado;
 }
 %code provides {
-void yyerror(const char *);
+void yyerror(const char *mensajeError);
 extern int yylexerrs;
 extern int yysemerrs;
 extern char buffer[120];
@@ -54,7 +54,7 @@ expresion                : expresion '+' expresion { $$ = generar_infijo($1,'+',
 identificador            : IDENTIFICADOR { if(procesar_id($1)) YYERROR; } // Checkea si ya está declarado
                          ;
 %%
-void yyerror(const char *s){ // si no hubiese estado definido, directamente el yyerror imprimiría: "syntax error" solamente
-    printf("Línea #%d: %s\n", yylineno, s);
+void yyerror(const char *mensajeError){ // si no hubiese estado definido, directamente el yyerror imprimiría: "syntax error" solamente
+    printf("Línea #%d: %s\n", yylineno, mensajeError);
     return;
 }
