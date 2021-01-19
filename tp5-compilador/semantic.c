@@ -4,11 +4,7 @@
 #include "parser.h"
 #include "symbol.h"
 
-int contador_temporales = 0;
-
-void generar_pseudo(char* comando, char* primero, char* segundo, char* tercero) {
-    printf("%s %s,%s,%s\n", comando, primero, segundo, tercero);
-}
+int contadorTemporales = 0;
 
 void comenzar() {
     generar_pseudo("Load", "rtlib", "", "");
@@ -20,77 +16,85 @@ void terminar() {
     return;
 }
 
-void escribir(char *nombre_simbolo) {
-    generar_pseudo("Write", nombre_simbolo, "Integer", "");
+void escribir(char *simbolo) {
+    generar_pseudo("Write", simbolo, "Integer", "");
     return;
 }
 
-void asignar(char *valor_l, char *valor_r) {
-    generar_pseudo("Store", valor_r, valor_l, "");
+void asignar(char *valorL, char *valorR) {
+    generar_pseudo("Store", valorR, valorL, "");
     return;
 }
 
-void leer(char *valor_l) {
-    generar_pseudo("Read", valor_l, "Integer", "");
+void leer(char *valorL) {
+    generar_pseudo("Read", valorL, "Integer", "");
     return;
 }
 
-int procesar_id(char* nombre_simbolo) {
-    if(!contiene_simbolo(tabla_simbolos, nombre_simbolo)) {
-        yysemerrs++;
-        sprintf(buffer, "Error semántico: identificador %s NO declarado", nombre_simbolo);
-        yyerror(buffer);
+int declarar(char *simbolo) {
+    if(!contiene_simbolo(tabla_simbolos, simbolo)) { // Se declara normalmente
+        struct simbolo *nuevo_simbolo = crear_nuevo_simbolo(simbolo);
+        insertar_al_principio(&tabla_simbolos, nuevo_simbolo);
+        generar_pseudo("Reserve", simbolo, "4", "");
+        return 0;
+    }
+    notificar_error_semantico(simbolo, "ya");
+    return 1;
+}
+
+int procesar_id(char *simbolo) {
+    if(!contiene_simbolo(tabla_simbolos, simbolo)) {
+        notificar_error_semantico(simbolo, "NO");
         return 1;
     }
     return 0;
 }
 
-int declarar(char *nombre_simbolo) {
-    if(!contiene_simbolo(tabla_simbolos, nombre_simbolo)) { // Se declara normalmente
-        struct simbolo *nuevo_simbolo = crear_nuevo_simbolo(nombre_simbolo);
-        insertar_al_principio(&tabla_simbolos, nuevo_simbolo);
-        generar_pseudo("Reserve", nombre_simbolo, "4", "");
-        return 0;
-    } else { // Hay una redeclaración
-        yysemerrs++;
-        sprintf(buffer, "Error semántico: identificador %s ya declarado", nombre_simbolo);
-        yyerror(buffer);
-        return 1;
-    }
+void notificar_error_semantico(char* simbolo, char* status) {
+    yysemerrs++;
+    sprintf(buffer, "Error semántico: identificador %s %s declarado", simbolo, status);
+    yyerror(buffer);
+    return;
 }
 
-char *generar_infijo(char* operando_izq, int operador, char* operando_der) {
+void generar_pseudo(char *codigoPseudo, char *primerParametro, char *segundoParametro, char *tercerParametro) {
+    printf("%s %s,%s,%s\n", codigoPseudo, primerParametro, segundoParametro, tercerParametro);
+    return;
+}
+
+char *generar_infijo(char *operandoIzq, int operador, char *operandoDer) {
     char *aux;
-    sprintf(buffer, "Temp#%d", ++contador_temporales);
+    sprintf(buffer, "Temp#%d", ++contadorTemporales);
     aux = strdup(buffer);
 
     declarar(aux);
 
-    switch(operador){
+    switch(operador) {
         case '+':
-            generar_pseudo("ADD", operando_izq, operando_der, buffer);
+            generar_pseudo("ADD", operandoIzq, operandoDer, buffer);
         break;
         case '-':
-            generar_pseudo("SUB", operando_izq, operando_der, buffer);
+            generar_pseudo("SUB", operandoIzq, operandoDer, buffer);
         break;
         case '*':
-            generar_pseudo("MUL", operando_izq, operando_der, buffer);
+            generar_pseudo("MUL", operandoIzq, operandoDer, buffer);
         break;
         case '/':
-            generar_pseudo("DIV", operando_izq, operando_der, buffer);
+            generar_pseudo("DIV", operandoIzq, operandoDer, buffer);
         break;
     }
+    
     return aux;
 }
 
-char *generar_unario(char* operando) {
+char *generar_unario(char *operando) {
     char *aux;
-    sprintf(buffer, "Temp#%d", ++contador_temporales);
+    sprintf(buffer, "Temp#%d", ++contadorTemporales);
     aux = strdup(buffer);
 
     declarar(aux);
 
     generar_pseudo("NEG", operando, "", buffer);
-    
+
     return aux;
 }

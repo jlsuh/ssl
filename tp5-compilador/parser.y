@@ -1,4 +1,4 @@
-%code top{
+%code top {
 #include <stdio.h>
 #include "scanner.h"
 #include "symbol.h"
@@ -7,7 +7,7 @@
 struct simbolo *tabla_simbolos = NULL;
 char resultado;
 }
-%code provides{
+%code provides {
 void yyerror(const char *);
 extern int yylexerrs;
 extern int yysemerrs;
@@ -42,11 +42,11 @@ lista-expresion          : lista-expresion ',' expresion { escribir($3); }
 lista-identificadores    : lista-identificadores ',' identificador { leer($3); }
                          | identificador { leer($1); }
                          ;
-expresion                : expresion '+' expresion {$$ = generar_infijo($1,'+',$3);}
-                         | expresion '-' expresion {$$ = generar_infijo($1,'-',$3);}
-                         | expresion '*' expresion {$$ = generar_infijo($1,'*',$3);}
-                         | expresion '/' expresion {$$ = generar_infijo($1,'/',$3);}
-                         | '-' expresion %prec NEG {$$ = generar_unario($2);}
+expresion                : expresion '+' expresion { $$ = generar_infijo($1,'+',$3); }
+                         | expresion '-' expresion { $$ = generar_infijo($1,'-',$3); }
+                         | expresion '*' expresion { $$ = generar_infijo($1,'*',$3); }
+                         | expresion '/' expresion { $$ = generar_infijo($1,'/',$3); }
+                         | '-' expresion %prec NEG { $$ = generar_unario($2); }
                          | '(' expresion ')' { $$ = $2; }
                          | identificador
                          | CONSTANTE
@@ -54,7 +54,6 @@ expresion                : expresion '+' expresion {$$ = generar_infijo($1,'+',$
 identificador            : IDENTIFICADOR { if(procesar_id($1)) YYERROR; } // Checkea si ya está declarado
                          ;
 %%
-/* Informar ocurrencia de un error */
 void yyerror(const char *s){ // si no hubiese estado definido, directamente el yyerror imprimiría: "syntax error" solamente
     printf("Línea #%d: %s\n", yylineno, s);
     return;

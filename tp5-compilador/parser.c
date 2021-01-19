@@ -1423,31 +1423,31 @@ yyreduce:
 
   case 15: /* expresion: expresion '+' expresion  */
 #line 45 "parser.y"
-                                                   {yyval = generar_infijo(yyvsp[-2],'+',yyvsp[0]);}
+                                                   { yyval = generar_infijo(yyvsp[-2],'+',yyvsp[0]); }
 #line 1428 "parser.c"
     break;
 
   case 16: /* expresion: expresion '-' expresion  */
 #line 46 "parser.y"
-                                                   {yyval = generar_infijo(yyvsp[-2],'-',yyvsp[0]);}
+                                                   { yyval = generar_infijo(yyvsp[-2],'-',yyvsp[0]); }
 #line 1434 "parser.c"
     break;
 
   case 17: /* expresion: expresion '*' expresion  */
 #line 47 "parser.y"
-                                                   {yyval = generar_infijo(yyvsp[-2],'*',yyvsp[0]);}
+                                                   { yyval = generar_infijo(yyvsp[-2],'*',yyvsp[0]); }
 #line 1440 "parser.c"
     break;
 
   case 18: /* expresion: expresion '/' expresion  */
 #line 48 "parser.y"
-                                                   {yyval = generar_infijo(yyvsp[-2],'/',yyvsp[0]);}
+                                                   { yyval = generar_infijo(yyvsp[-2],'/',yyvsp[0]); }
 #line 1446 "parser.c"
     break;
 
   case 19: /* expresion: '-' expresion  */
 #line 49 "parser.y"
-                                                   {yyval = generar_unario(yyvsp[0]);}
+                                                   { yyval = generar_unario(yyvsp[0]); }
 #line 1452 "parser.c"
     break;
 
@@ -1691,7 +1691,6 @@ yyreturn:
 
 #line 56 "parser.y"
 
-/* Informar ocurrencia de un error */
 void yyerror(const char *s){ // si no hubiese estado definido, directamente el yyerror imprimiría: "syntax error" solamente
     printf("Línea #%d: %s\n", yylineno, s);
     return;
