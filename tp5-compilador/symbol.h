@@ -6,8 +6,8 @@ struct simbolo {
     struct simbolo* sig;
 };
 
-struct simbolo *crear_nuevo_simbolo(const char* nombre_simbolo);
-struct simbolo *insertar_al_principio(struct simbolo **head, struct simbolo *simbolo_a_insertar);
-int contiene_simbolo(struct simbolo *head, const char* nombre_a_buscar);
+struct simbolo *crear_nuevo_simbolo(char *nuevoNombre);
+struct simbolo *insertar_al_principio(struct simbolo **head, struct simbolo *simboloAInsertar);
+int contiene_simbolo(struct simbolo *head, const char* nombreABuscar);
 
 #endif // SYMBOL_H_INCLUDED

@@ -5,26 +5,26 @@
 #include "parser.h"
 #include "semantic.h"
 
-struct simbolo *crear_nuevo_simbolo(const char* nombre_simbolo) {
-    struct simbolo *nuevo_simbolo = malloc(sizeof(struct simbolo));
-    strcpy(nuevo_simbolo->nombre, nombre_simbolo);
-    nuevo_simbolo->sig = NULL;
-    return nuevo_simbolo;
+struct simbolo *crear_nuevo_simbolo(char *nuevoNombre) {
+    struct simbolo *nuevoSimbolo = malloc(sizeof(struct simbolo));
+    strcpy(nuevoSimbolo->nombre, nuevoNombre);
+    nuevoSimbolo->sig = NULL;
+    return nuevoSimbolo;
 }
 
-struct simbolo *insertar_al_principio(struct simbolo **head, struct simbolo *simbolo_a_insertar) {
-    simbolo_a_insertar->sig = *head;
-    *head = simbolo_a_insertar;
-    return simbolo_a_insertar;
+struct simbolo *insertar_al_principio(struct simbolo **head, struct simbolo *simboloAInsertar) {
+    simboloAInsertar->sig = *head;
+    *head = simboloAInsertar;
+    return simboloAInsertar;
 }
 
-int contiene_simbolo(struct simbolo *head, const char* nombre_a_buscar) {
-    struct simbolo *aux = head;
-    while(aux != NULL) {
-        if(strcmp(aux->nombre, nombre_a_buscar) == 0) {
+int contiene_simbolo(struct simbolo *head, const char* nombreABuscar) {
+    struct simbolo *auxHead = head;
+    while(auxHead != NULL) {
+        if(strcmp(auxHead->nombre, nombreABuscar) == 0) {
             return 1;
         }
-        aux = aux->sig;
+        auxHead = auxHead->sig;
     }
     return 0;
 }
