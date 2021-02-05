@@ -29,7 +29,7 @@ fin-prog                                                        {yylval; return 
 "-"                                                             return '-';
 "*"                                                             return '*';
 "/"                                                             return '/';
-"<-"                                                            {yylval = strdup(yytext); return ASIGNACION;}
+"<-"                                                            {yylval; return ASIGNACION;}
 "("                                                             return '(';
 ")"                                                             return ')';
 ","                                                             return ',';
