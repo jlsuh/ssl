@@ -18,11 +18,11 @@ Identificador       {Letra}({Letra}|{Digito})*
 ConstanteEntera     {Digito}+
 
 %%
-declarar                                                        {yylval = strdup(yytext); return DECLARAR;}
-leer                                                            {yylval = strdup(yytext); return LEER;}
-escribir                                                        {yylval = strdup(yytext); return ESCRIBIR;}
-programa                                                        {yylval = strdup(yytext); return PROGRAMA;}
-fin-prog                                                        {yylval = strdup(yytext); return FINPROG;}
+declarar                                                        {yylval; return DECLARAR;}
+leer                                                            {yylval; return LEER;}
+escribir                                                        {yylval; return ESCRIBIR;}
+programa                                                        {yylval; return PROGRAMA;}
+fin-prog                                                        {yylval; return FINPROG;}
 {Identificador}                                                 {yylval = strdup(yytext); return IDENTIFICADOR;}
 {ConstanteEntera}                                               {yylval = strdup(yytext); return CONSTANTE;}
 "+"                                                             return '+';
