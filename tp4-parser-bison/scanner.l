@@ -18,18 +18,18 @@ Identificador       {Letra}({Letra}|{Digito})*
 ConstanteEntera     {Digito}+
 
 %%
-declarar                                                        {yylval; return DECLARAR;}
-leer                                                            {yylval; return LEER;}
-escribir                                                        {yylval; return ESCRIBIR;}
-programa                                                        {yylval; return PROGRAMA;}
-fin-prog                                                        {yylval; return FINPROG;}
+declarar                                                        {return DECLARAR;}
+leer                                                            {return LEER;}
+escribir                                                        {return ESCRIBIR;}
+programa                                                        {return PROGRAMA;}
+fin-prog                                                        {return FINPROG;}
 {Identificador}                                                 {yylval = strdup(yytext); return IDENTIFICADOR;}
 {ConstanteEntera}                                               {yylval = strdup(yytext); return CONSTANTE;}
 "+"                                                             return '+';
 "-"                                                             return '-';
 "*"                                                             return '*';
 "/"                                                             return '/';
-"<-"                                                            {yylval; return ASIGNACION;}
+"<-"                                                            {return ASIGNACION;}
 "("                                                             return '(';
 ")"                                                             return ')';
 ","                                                             return ',';
