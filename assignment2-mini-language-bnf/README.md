@@ -21,11 +21,11 @@ programa
   escribir (total/2);
 fin-prog
 ```
-A correct program in Mini starts with the keyword `programa` and finishes with the keyword `fin-prog`. There must be a list of sentences in between them. It can eventually be an empty list of sentences.
+A correct program in Mini starts with the keyword `programa` and finishes with the keyword `fin-prog`. There must be a list of statements in between them. It can eventually be an empty list of statements.
 
-To simplify, let's consider that all types of declaration are a type of sentence. Variable declarations can take place anywhere in the program, but must be declared before using it in any type of sentence.
+To simplify, let's consider that all types of declaration are a type of statement. Variable declarations can take place anywhere in the program, but must be declared before using it in any type of statement.
 
-All sentences and declarations finish with `;`.
+All statements and declarations finish with `;`.
 
 Blank spaces (space, horizontal tab, new line) are ignored.
 
@@ -61,7 +61,7 @@ We can also alter the precedence by using parenthesis. Operands can be integers 
 ## Semantic aspects
 Variables must be declared before its usage and it's not considered right to duplicate a declaration. Therefore we can only have two kinds of semantic errors:
 - Declaring more than once the same variable (redeclaration).
-- Using an undeclared variable in a sentence (no declaration).
+- Using an undeclared variable in a statement (no declaration).
 ## Error handling
 It's not part of the language, but we could consider 3 kinds of lexical errors we want to identify:
 - Common error: formed by a sequence of one or more invalid characters (we treated as the 'others' column on assignment 1, i.e.: @ or !. e.g.: !::&)
