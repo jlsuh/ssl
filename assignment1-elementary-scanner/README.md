@@ -61,9 +61,9 @@ Other files can be added as desired. Transition table must be documented (textfi
 ---
 ## Compile
 ```
-gcc -o elem *.c
+gcc -o scanner *.c
 ```
 ## Run
 ```
-./elem <input.txt
+./scanner <input.txt
 ```
