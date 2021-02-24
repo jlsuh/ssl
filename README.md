@@ -10,8 +10,10 @@ Table of Contents
 * [Implementing a parser with Bison](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment4-parser-bison)
 * [Compiler's Frontend](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment5-compiler-frontend)
 
-# Course code: K2004
-# Professor: Lic. Eduardo Zúñiga
+# Course information
+Code: K2004
+
+Professor: Lic. Eduardo Zúñiga
 
 # Group members
 |     Member     |                       User                       |
