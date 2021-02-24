@@ -4,11 +4,11 @@ This repository aims to record assignments of the subject Syntax and Semantics o
 
 Table of Contents
 =================
-* [Elementary Scanner](#elementary-scanner)
-* [Mini's BNF](#minis-bnf)
-* [Implementing a scanner with Flex](#implementing-a-scanner-with-flex)
-* [Implementing a parser with Bison](#implementing-a-parser-with-bison)
-* [Compiler's Frontend](#compilers-frontend)
+* [Elementary Scanner](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment1-elementary-scanner)
+* [Mini's BNF](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment2-mini-language-bnf)
+* [Implementing a scanner with Flex](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment3-scanner-flex)
+* [Implementing a parser with Bison](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment4-parser-bison)
+* [Compiler's Frontend](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment5-compiler-frontend)
 
 # Group members
 |     Member     |                       User                       |
