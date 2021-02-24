@@ -3,15 +3,15 @@
 We will be programming a deterministic finite automaton which will be able to recognize 3 different types of sublanguages:
 
 1. Integers: these strings are formed by decimal digits only.
-2. Identifiers: these strings starts with a letter (it doesn't matter if it's in uppercase or not) and followed by a sequence of alphanumeric characters.
+2. Identifiers: these strings start with a letter (it doesn't matter if it's in uppercase or not) and followed by a sequence of alphanumeric characters.
 3. Hash: this sublanguage is formed by just a single hash (#) character.
 
 The incoming textfile, which the program will be analyzing, could contain different lexemes from these sublanguages. Whitespaces are ignored, their only purpose is to provide legibility by spacing out each lexemes. By saying 'white spaces' we mean: blank spaces, horizontal tabs & new lines.
 
-The textfile could contain characters that weren't took into account, e.g.: asterisks, arithmetic operators, etc.
+The textfile would contain characters that weren't taken into account, e.g.: asterisks, arithmetic operators, etc.
 In case of identifying any string formed by these, it must be considered as an error. The automaton must inform the error after going through the lexeme and be ready for the next scan. We can conclude then, an error is regarded as another sublanguage to recognize.
 
-The program must analyze the input (we'll be redirecting the textfile through stdin) and inform what has come across. It must then inform the total amount of lexemes that were found by each lexical category.
+The program must analyze the input (we'll be redirecting the textfile through stdin) and inform what has come across. It must then inform the total number of lexemes that were found by each lexical category.
 
 ### Example
 Given the input:
@@ -63,7 +63,7 @@ Other files can be added as desired. Transition table must be documented (textfi
 ```
 gcc -o elem *.c
 ```
-## Redirect input textfile
+## Run the program
 ```
 ./elem <input.txt
 ```
