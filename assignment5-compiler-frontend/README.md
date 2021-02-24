@@ -8,7 +8,7 @@ Based on what has been done in the 4th assignment, we will add the semantic rout
 - For temporary variables we will use `Temp#i`, where i is the temporary number.
 - When semantic errors are detected, we will use YYERROR to stop parsing the statement or definition where the error occurred.
 - We won't use yyerrorok.
-## Pseudoa assembler instructions
+## Pseudo assembler instructions
 - When declaring a variable, we will reserve 4 bytes of memory with `Reserve` and 2 parameters, the variable name and the number of bytes to reserve.
 - Load, to load the library at runtime, it should be: Load rtlib ,,
 - ADD, for the sum
@@ -30,5 +30,5 @@ gcc -o compiler *.c -lfl
 ```
 ./compiler <okinput.txt
 ```
-
+---
 [< Previous assignment](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment4-parser-bison) - [Back to index >](https://github.com/jlsuh/TP-SSL-K2004)

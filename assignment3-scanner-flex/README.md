@@ -27,5 +27,5 @@ gcc -o scanner *.c -lfl
 ```
 ./scanner <input.txt
 ```
-
+---
 [< Previous assignment](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment2-mini-language-bnf) - [Next assignment >](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment4-parser-bison)
