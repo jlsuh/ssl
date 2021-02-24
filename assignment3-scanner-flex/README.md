@@ -2,7 +2,7 @@
 ## Objectives
 We will be implementing the scanner made on assignment 1 (from scratch), but this time with Flex. We need to keep in mind that all returned tokens are not strictly as the documented ones. These can be modularized for a better implementation, e.g. a token for each keyword, punctuator and operator.
 ## Remarks
-- There must be an `enum` which groups the tokens in the `tokens.h` file.
+- There must be an `enum` which groups the tokens in `tokens.h`.
 - Flex's definition must not contain user's code section. Additional code must be added in `main.c`.
 - The scanner implemented with Flex shall:
   - Return the token in case of finding a grammatical element.
