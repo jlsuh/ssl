@@ -21,7 +21,7 @@ Based on the syntactical grammatic made in assignment 2 and the implementation o
 ## Suggestions
 - Use `noinput` and `nounput` directives to suppress unnecessary warnings.
 ---
-## Comipile
+## Compile
 ```
 flex scanner.l
 parser bison.y
