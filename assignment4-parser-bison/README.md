@@ -2,7 +2,7 @@
 ## Objectives
 Based on the syntactical grammatic made in assignment 2 and the implementation of the lexical grammatic made in assignment 3, we will be constructing a program capable of recognizing a Mini source file.
 ## Remarks
-- Flex and Bison should implement the directives which avoid the obligatory usage of additional options on the shell.
+- Flex and Bison should implement directives which avoid the obligatory usage of additional options on the shell.
 - `main.c` must invoke `yyparse()` and will inform if the compilation was successfull or not. It must show the number of lexical and syntactical errors.
 - `yyerror()` should have a more detailed error message (not just 'syntax error'). Redefinition of `yyerror()` must be done in `parser.y` epilogue.
 - The analysis shouldn't be aborted on the first error. It must go through all the existing source file.
@@ -19,7 +19,7 @@ Based on the syntactical grammatic made in assignment 2 and the implementation o
   - Closing parenthesis: `paréntesis`
 - We must flatten out the grammatic and use the corresponding directives to establish precedence and associativity.
 ## Suggestions
-- Use `noinput` and `nounput` directives to suppress unnecesary warnings.
+- Use `noinput` and `nounput` directives to suppress unnecessary warnings.
 ---
 ## Comipile
 ```
