@@ -67,3 +67,5 @@ It's not part of the language, but we could consider 3 kinds of lexical errors w
 - Common error: formed by a sequence of one or more invalid characters (we treated as the 'others' column on assignment 1, i.e.: @ or !. e.g.: !::&)
 - Identifier error: formed by an identifier that starts with at least an invalid character, followed by more invalid characters and/or characters that can be part of a correct identifier. e.g.: total$, total2@a!1
 - Integer error: formed by a digit and followed by alphanumeric characters. e.g.: 123ab , 56A7
+
+[< Previous assignment](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment1-elementary-scanner) - [Next assignment >](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment3-scanner-flex)

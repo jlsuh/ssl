@@ -67,3 +67,5 @@ gcc -o scanner *.c
 ```
 ./scanner <input.txt
 ```
+
+[< Back to index](https://github.com/jlsuh/TP-SSL-K2004) - [Next assignment >](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment1-elementary-scanner)

@@ -31,3 +31,5 @@ gcc -o recognizer *.c -lfl
 ```
 ./recognizer <okinput.txt
 ```
+
+[< Previous assignment](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment3-scanner-flex) - [Next assignment >](https://github.com/jlsuh/TP-SSL-K2004/tree/master/assignment5-compiler-frontend)
