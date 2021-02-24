@@ -1,6 +1,6 @@
 # Syntax and Semantics of Languages
 ---
-This repository aims to record assignments of the subject Syntax and Semantics of Languages. The subject is part of the 2° year of the information systems engineering degree, UTN FRBA.
+This repository aims to record assignments of the subject Syntax and Semantics of Languages. The subject is part of the 2° year of the Information Systems Engineering degree, UTN FRBA.
 
 Table of Contents
 =================
