@@ -23,7 +23,7 @@ fin-prog
 ```
 A correct program in Mini starts with the keyword `programa` and finishes with the keyword `fin-prog`. There must be a list of sentences in between them. It can eventually be an empty list of sentences.
 
-To simplify, let's consider that all types of declaration are a type of sentence. Variable declarations can take place anywhere in the program, but must be declared before using it in any other type of sentence.
+To simplify, let's consider that all types of declaration are a type of sentence. Variable declarations can take place anywhere in the program, but must be declared before using it in any type of sentence.
 
 All sentences and declarations finish with `;`.
 
