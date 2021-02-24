@@ -59,11 +59,11 @@ The program should be at least divided by 3 files: `main.c`, `scanner.c` & `scan
 Other files can be added as desired. Transition table must be documented (textfile or spreadsheet). The program must compile correctly by the C11/C17 standard and must be strictly attached to it. This means, the program shouldn't contain operative system dependent code.
 
 ---
-## Compile the project
+## Compile
 ```
 gcc -o elem *.c
 ```
-## Run the program
+## Run
 ```
 ./elem <input.txt
 ```
