@@ -1,6 +1,6 @@
 # Compiler's Frontend
 ## Objectives
-Based on what has been done in the 4th assignment, we will add the semantic routines to have the complete compiler (in actually a front end if we consider that our pseudo assembler is intermediate code).
+Based on what has been done in the 4th assignment, we will add the semantic routines to have the complete compiler (actually, just a front end if we consider that our pseudo assembler is intermediate code).
 ## Remarks
 - We will group the routines that handle the dictionary in `symbol.c`. It is not required the most efficient routine, we just need one that is clear and correct.
 - We will group the semantic routines in `sematic.c`, there are several micro compiler functions that can be reused, eventually with appropriate adjustments. We may also need new functions.
