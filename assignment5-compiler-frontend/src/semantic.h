@@ -1,7 +1,10 @@
 #ifndef SEMANTIC_H_INCLUDED
 #define SEMANTIC_H_INCLUDED
 
-extern struct simbolo *tabla_simbolos;
+#include "parser.h"
+#include "symbol.h"
+
+extern struct simbolo *tablaSimbolos;
 
 void comenzar();
 void terminar();

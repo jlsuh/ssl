@@ -1,12 +1,15 @@
 %code top {
-#include <stdio.h>
 #include "scanner.h"
 #include "symbol.h"
 #include "semantic.h"
 
-struct simbolo *tabla_simbolos = NULL;
+struct simbolo *tablaSimbolos = NULL;
 }
 %code provides {
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 void yyerror(const char *mensajeError);
 extern int yylexerrs;
 extern int yysemerrs;

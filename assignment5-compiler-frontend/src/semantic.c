@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <string.h>
 #include "semantic.h"
-#include "parser.h"
-#include "symbol.h"
 
 int contadorTemporales = 0;
 
@@ -16,43 +12,47 @@ void terminar() {
     return;
 }
 
-void escribir(char *simbolo) {
-    generar_pseudo("Write", simbolo, "Integer", "");
+void escribir(char *nombreSimbolo) {
+    generar_pseudo("Write", nombreSimbolo, "Integer", "");
+    free(nombreSimbolo);
     return;
 }
 
 void asignar(char *valorL, char *valorR) {
     generar_pseudo("Store", valorR, valorL, "");
+    free(valorL);
+    free(valorR);
     return;
 }
 
 void leer(char *valorL) {
     generar_pseudo("Read", valorL, "Integer", "");
+    free(valorL);
     return;
 }
 
-int declarar(char *simbolo) {
-    if(!contiene_simbolo(tabla_simbolos, simbolo)) { // Se declara normalmente
-        struct simbolo *nuevo_simbolo = crear_nuevo_simbolo(simbolo);
-        insertar_al_principio(&tabla_simbolos, nuevo_simbolo);
-        generar_pseudo("Reserve", simbolo, "4", "");
+int declarar(char *nombreSimbolo) {
+    if(!contiene_simbolo(tablaSimbolos, nombreSimbolo)) { // Se declara normalmente
+        struct simbolo *nuevoSimbolo = crear_nuevo_simbolo(nombreSimbolo);
+        insertar_al_principio(&tablaSimbolos, nuevoSimbolo);
+        generar_pseudo("Reserve", nombreSimbolo, "4", "");
         return 0;
     }
-    notificar_error_semantico(simbolo, "ya");
+    notificar_error_semantico(nombreSimbolo, "ya");
     return 1;
 }
 
-int procesar_id(char *simbolo) {
-    if(!contiene_simbolo(tabla_simbolos, simbolo)) {
-        notificar_error_semantico(simbolo, "NO");
+int procesar_id(char *nombreSimbolo) {
+    if(!contiene_simbolo(tablaSimbolos, nombreSimbolo)) {
+        notificar_error_semantico(nombreSimbolo, "NO");
         return 1;
     }
     return 0;
 }
 
-void notificar_error_semantico(char* simbolo, char* status) {
+void notificar_error_semantico(char* nombreSimbolo, char* status) {
     yysemerrs++;
-    sprintf(buffer, "Error semántico: identificador %s %s declarado", simbolo, status);
+    sprintf(buffer, "Error semántico: identificador %s %s declarado", nombreSimbolo, status);
     yyerror(buffer);
     return;
 }
